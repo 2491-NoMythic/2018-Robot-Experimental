@@ -8,7 +8,6 @@ import com._2491nomythic.tempest.commands.autonomous.AutomaticTwoCube.SecondCube
 import com._2491nomythic.tempest.commands.cubestorage.TransportCubeTime;
 import com._2491nomythic.tempest.commands.drivetrain.DrivePath;
 import com._2491nomythic.tempest.commands.drivetrain.DriveTime;
-import com._2491nomythic.tempest.commands.drivetrain.RotateDrivetrainWithGyroPID;
 import com._2491nomythic.tempest.commands.shooter.RunShooterCustom;
 import com._2491nomythic.tempest.commands.shooter.SetShooterSpeed;
 import com._2491nomythic.tempest.settings.Constants;
