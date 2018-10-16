@@ -1,4 +1,6 @@
-package com._2491nomythic.tempest.commands;
+package com._2491nomythic.tempest.commands.intake;
+
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Runs shooter motors backwards to intake a cube from the portal

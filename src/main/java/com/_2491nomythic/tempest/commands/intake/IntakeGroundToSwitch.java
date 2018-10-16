@@ -1,4 +1,6 @@
-package com._2491nomythic.tempest.commands;
+package com._2491nomythic.tempest.commands.intake;
+
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Acquires a cube from the ground and prepares to fire to the switch

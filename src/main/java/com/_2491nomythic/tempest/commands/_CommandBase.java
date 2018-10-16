@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The base for all commands. All atomic commands should subclass CommandBase. CommandBase creates and stores each control system. To access a subsystem elsewhere in your code in your code use CommandBase.exampleSubsystem
+ * The base for all commands. All atomic commands should subclass CommandBase. 
+ * CommandBase creates and stores each control system. 
+ * To access a subsystem elsewhere in your code in your code use CommandBase.exampleSubsystem
  */
 public abstract class _CommandBase extends Command {
 	protected static OI oi;
@@ -30,12 +32,15 @@ public abstract class _CommandBase extends Command {
 		pathing = Pathing.getInstance();
 		climber = Climber.getInstance();
 		
+		/* 
+		This MUST be here. If the OI creates Commands (which it very likely
+		will), constructing it during the construction of CommandBase (from
+		which commands extend), subsystems are not guaranteed to be
+		yet. Thus, their requires() statements may grab null pointers. Bad
+		news. Don't move it.
+		*/
+		
 		oi.init();
-		// This MUST be here. If the OI creates Commands (which it very likely
-		// will), constructing it during the construction of CommandBase (from
-		// which commands extend), subsystems are not guaranteed to be
-		// yet. Thus, their requires() statements may grab null pointers. Bad
-		// news. Don't move it.
 		
 		// Show what command your subsystem is running on the SmartDashboard
 		SmartDashboard.putData(drivetrain);
