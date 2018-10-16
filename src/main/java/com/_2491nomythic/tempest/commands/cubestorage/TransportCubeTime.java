@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.cubestorage;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  *Runs cube storage system for specified period of time at specified speed.
  */
-public class TransportCubeTime extends CommandBase {
+public class TransportCubeTime extends _CommandBase {
 	private double speed;
 	private double time;
 	Timer timer;

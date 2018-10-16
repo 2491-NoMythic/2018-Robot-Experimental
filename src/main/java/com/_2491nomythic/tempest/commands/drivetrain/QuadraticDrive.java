@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * Controls the robot with quadratic acceleration as according to driver control input
  */
-public class QuadraticDrive extends CommandBase {
+public class QuadraticDrive extends _CommandBase {
 	private double turnSpeed, leftSpeed, rightSpeed, rawLeftSpeed, rawRightSpeed, accelerationInterval, time, timeAddition, accelerationIncrease, quadraticCoefficient;
 	int state, necessaryIterations;
 	private Timer timer;

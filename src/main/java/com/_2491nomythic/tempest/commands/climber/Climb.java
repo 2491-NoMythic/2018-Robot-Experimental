@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.climber;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 /**
  *Has the climber progress through climb preparation and execution phases based on the number of times the button has been pressed.
  */
-public class Climb extends CommandBase {
+public class Climb extends _CommandBase {
 	
 	private double speedL, speedR;
 	private int timesPressed;

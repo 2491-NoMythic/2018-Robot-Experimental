@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.*;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
@@ -9,7 +9,7 @@ import com._2491nomythic.tempest.subsystems.Pathing;
 /**
  * A command for streaming a selected TalonSRX Velocity mode path
  */
-public class DrivePath extends CommandBase {
+public class DrivePath extends _CommandBase {
 	private int mCurrentStep, mTimeCounter, mReverseDirection, mSwaped, mLength, stepCounter;
 	private double mInitialHeading, mHeadingDiffrence, mTurnAdjustment, mAdjustedLeftVelocity, mAdjustedRightVelocity;
 	private String mSelectedLeftPath, mSelectedRightPath, mSelectedHeading, mSelectedEndPosition;

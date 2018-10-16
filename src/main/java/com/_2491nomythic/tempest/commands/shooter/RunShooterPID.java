@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  * Runs both shooter PID Loops
  * @deprecated
  */
-public class RunShooterPID extends CommandBase {
+public class RunShooterPID extends _CommandBase {
 	private RunLeftShootPID runLeft;
 	private RunRightShootPID runRight;
 

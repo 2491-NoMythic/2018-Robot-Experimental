@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.buttonboard;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.KillSwitch;
 import com._2491nomythic.tempest.commands.shooter.RunShooterManual;
 import com._2491nomythic.tempest.settings.Constants;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class SpinUp extends CommandBase {
+public class SpinUp extends _CommandBase {
 	private boolean button1, button2, cancel, released;
 	private RunShooterManual spinUp;
 	private KillSwitch endPlease;

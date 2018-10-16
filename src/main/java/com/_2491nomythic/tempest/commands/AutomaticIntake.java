@@ -6,7 +6,7 @@ import com._2491nomythic.tempest.commands.intake.RunIntakeUltrasonic;
 /**
  * Goes through the entire cube intake process automatically
  */
-public class AutomaticIntake extends CommandBase {
+public class AutomaticIntake extends _CommandBase {
 	private UltrasonicCubeHalt loadCube;
 	private RunIntakeUltrasonic intakeCube;
 	/**

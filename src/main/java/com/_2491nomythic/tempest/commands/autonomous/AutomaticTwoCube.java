@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.Crossing;
 import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.EndPosition;
 import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.Priority;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class AutomaticTwoCube extends CommandBase {
+public class AutomaticTwoCube extends _CommandBase {
 	private AutomaticAuto path;
 	private CenterSecondCube center;
 	private LeftSecondCube left;

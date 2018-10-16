@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * Goes through the entire cube intake process automatically
  */
-public class AutomaticIntakeWithFingers extends CommandBase {
+public class AutomaticIntakeWithFingers extends _CommandBase {
 	private UltrasonicCubeHalt loadCube;
 	private RunIntakeUltrasonic intakeCube;
 	private Timer timer;

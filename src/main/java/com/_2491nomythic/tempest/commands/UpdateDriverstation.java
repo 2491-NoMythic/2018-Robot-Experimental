@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Updates values in the code from editable values on the SmartDashboard
  */
-public class UpdateDriverstation extends CommandBase {
+public class UpdateDriverstation extends _CommandBase {
 	private Timer timer;
-	private double nextRun, maximumSpeed;
+	private double nextRun;
 
 	/**
 	 * Updates values in the code from editable values on the SmartDashboard

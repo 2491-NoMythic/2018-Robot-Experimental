@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.lights;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *
  */
-public class SerialConnectivityTest extends CommandBase {
+public class SerialConnectivityTest extends _CommandBase {
 
     public SerialConnectivityTest() {
         // Use requires() here to declare subsystem dependencies

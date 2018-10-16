@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.lights;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class UpdateLightsPattern extends CommandBase {
+public class UpdateLightsPattern extends _CommandBase {
 	private Timer sonicTimer, readyToFireTimer;
 	private boolean newCube, readyEnough;
 	private int data;

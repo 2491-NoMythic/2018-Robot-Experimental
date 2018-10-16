@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.climber;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *Launches the grappling hook. Cannot be undone.
  */
-public class LaunchGrapplingHook extends CommandBase {
+public class LaunchGrapplingHook extends _CommandBase {
 
     /**
      * Launches the grappling hook. Cannot be undone.

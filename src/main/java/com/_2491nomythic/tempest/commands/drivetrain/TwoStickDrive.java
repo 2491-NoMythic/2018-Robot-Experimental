@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  *Lets the driver control the drivetrain using two controllers
  */
-public class TwoStickDrive extends CommandBase {
+public class TwoStickDrive extends _CommandBase {
 	private double lastLeftSpeed, currentLeftSpeed, lastRightSpeed, currentRightSpeed;
 	
 	/**

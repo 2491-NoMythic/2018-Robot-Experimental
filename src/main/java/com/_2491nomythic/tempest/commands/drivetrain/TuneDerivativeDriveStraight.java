@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
  * Tunes the derivative value of the robot to be optimal when driving straight. 
  * YOU MUST HAVE PID TURN TUNED BEFORE USING THIS COMMAND!
  */
-public class TuneDerivativeDriveStraight extends CommandBase {
+public class TuneDerivativeDriveStraight extends _CommandBase {
 	private double[] derivative, timeToReachDestination;
 	private double distance, targetDistance, maximumAcceptedTime, absoluteError;
 	private RotateDrivetrainWithGyroPID rotate;

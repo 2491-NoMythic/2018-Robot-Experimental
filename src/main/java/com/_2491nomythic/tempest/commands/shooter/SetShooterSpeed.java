@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  *Sets the shooter power based on scale height.
  */
-public class SetShooterSpeed extends CommandBase {
+public class SetShooterSpeed extends _CommandBase {
 	public double shooterSpeed;
 
 	/**

@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
  * @author Thomas
  *
  */
-public class TuneProportional extends CommandBase {
+public class TuneProportional extends _CommandBase {
 	private double[] proportional, averageAngle;
 	private double maximumAngle, minimumAngle, relativeAngle, destinationAngle, avgAngle;
 	private int i, bestTrial, numberOfTrials;

@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  * Runs the shooter as according to input from a controller
  */
-public class RunShooterManual extends CommandBase {
+public class RunShooterManual extends _CommandBase {
 
 	/**
 	 * Runs the shooter as according to input from a controller

@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPosition;
 import com._2491nomythic.tempest.settings.Variables;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
  * Attempts to cross the AutoLine during autonomous.
  * @deprecated
  */
-public class CrossAutoLine extends CommandBase {
+public class CrossAutoLine extends _CommandBase {
 	DriveStraightToPosition crossLine;
 	Timer timer, delay;
 

@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.ImprovedAutoIntake;
 import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.EndPosition;
 import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.StartPosition;
@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class RightSecondCube extends CommandBase {
+public class RightSecondCube extends _CommandBase {
 	private String gameData, scaleData;
 	private boolean goForSwitch, completed, shooterSafety;
 	private ImprovedAutoIntake autoIntake;

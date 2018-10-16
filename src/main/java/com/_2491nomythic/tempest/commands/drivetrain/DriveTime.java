@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
  */
-public class DriveTime extends CommandBase {
+public class DriveTime extends _CommandBase {
 	private Timer timer;
 	private double leftSpeed, rightSpeed, time;
 

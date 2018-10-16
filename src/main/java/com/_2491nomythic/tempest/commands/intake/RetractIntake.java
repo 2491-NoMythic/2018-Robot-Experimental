@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Retracts the intake into the robot
  */
-public class RetractIntake extends CommandBase {
+public class RetractIntake extends _CommandBase {
 
 	/**
 	 * Retracts the intake into the robot

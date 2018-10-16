@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  * Acquires a cube from the ground and prepares to fire to the switch
  */
-public class IntakeGroundToSwitch extends CommandBase {
+public class IntakeGroundToSwitch extends _CommandBase {
 	private int state;
 	
 	/**

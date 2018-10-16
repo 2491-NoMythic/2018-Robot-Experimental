@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *Resets the gyro when called.
  */
-public class ResetGyro extends CommandBase {
+public class ResetGyro extends _CommandBase {
 
 	/**
 	 * Resets the gyro when called

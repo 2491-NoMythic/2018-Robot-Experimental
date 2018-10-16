@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 	private static Intake instance;
 	private TalonSRX left, right;
-	private DoubleSolenoid activateIntakeSolenoid, intakeOpenSolenoid; 
+	private DoubleSolenoid deplymentSolenoid, fingerSolenoid; 
 	
 	public static Intake getInstance() {
 		if (instance == null) {
@@ -28,9 +28,11 @@ public class Intake extends Subsystem {
 	 */
 	public Intake() {
 		left = new TalonSRX(Constants.intakeTalonLeftChannel);
+		left.setInverted(true);
+		
 		right = new TalonSRX(Constants.intakeTalonRightChannel);
-		activateIntakeSolenoid = new DoubleSolenoid(Constants.intakeSolenoidActivateChannelForward, Constants.intakeSolenoidActivateChannelReverse);
-		intakeOpenSolenoid = new DoubleSolenoid(Constants.intakeSolenoidOpenChannelForward, Constants.intakeSolenoidOpenChannelReverse);
+		deplymentSolenoid = new DoubleSolenoid(Constants.intakeSolenoidActivateChannelForward, Constants.intakeSolenoidActivateChannelReverse);
+		fingerSolenoid = new DoubleSolenoid(Constants.intakeSolenoidOpenChannelForward, Constants.intakeSolenoidOpenChannelReverse);
 	}
 	
 	/**
@@ -38,8 +40,7 @@ public class Intake extends Subsystem {
 	 * @param speed The speed that the motors will run at.
 	 */
 	public void run(double speed) {
-		runLeft(speed);
-		runRight(speed);
+		run(speed, speed);
 	}
 	
 	public void run(double leftSpeed, double rightSpeed) {
@@ -52,7 +53,7 @@ public class Intake extends Subsystem {
 	 * @param speed The speed that the motors will run at.
 	 */
 	public void runLeft(double speed) {
-		left.set(ControlMode.PercentOutput, -speed);
+		left.set(ControlMode.PercentOutput, speed);
 	}
 	
 	/**
@@ -67,14 +68,14 @@ public class Intake extends Subsystem {
 	 * Sets the intake out of the frame perimeter.
 	 */
 	public void openArms() {
-		activateIntakeSolenoid.set(Value.kForward);
+		deplymentSolenoid.set(Value.kForward);
 	}
 	
 	/**
 	 * Sets the intake in the frame perimeter.
 	 */
 	public void retractArms() {
-		activateIntakeSolenoid.set(Value.kReverse);
+		deplymentSolenoid.set(Value.kReverse);
 		retractFingers();
 	}
 	
@@ -82,14 +83,14 @@ public class Intake extends Subsystem {
 	 * Sets the intake fingers to the open state.
 	 */
 	public void openFingers() {
-		intakeOpenSolenoid.set(Value.kForward);
+		fingerSolenoid.set(Value.kForward);
 	}
 	
 	/**
 	 * Sets the intake fingers to the closed state.
 	 */
 	public void retractFingers() {
-		intakeOpenSolenoid.set(Value.kReverse);
+		fingerSolenoid.set(Value.kReverse);
 	}
 	
 	/**
@@ -97,7 +98,7 @@ public class Intake extends Subsystem {
 	 * @return Whether or not the intake arms are extended.
 	 */
 	public boolean armsRetracted() {
-		return activateIntakeSolenoid.get() == Value.kReverse || activateIntakeSolenoid.get() == Value.kOff;
+		return deplymentSolenoid.get() == Value.kReverse || deplymentSolenoid.get() == Value.kOff;
 	}
 	
 	/**
@@ -105,7 +106,7 @@ public class Intake extends Subsystem {
 	 * @return Whether or not the intake fingers are open.
 	 */
 	public boolean fingersOpened() {
-		return intakeOpenSolenoid.get() == Value.kForward;
+		return fingerSolenoid.get() == Value.kForward;
 	}
 	
 	/**

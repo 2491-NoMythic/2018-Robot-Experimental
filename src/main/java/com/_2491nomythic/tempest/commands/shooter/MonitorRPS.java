@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
  * Keeps track of and adjusts shooter motors for firing consistently
  * @deprecated
  */
-public class MonitorRPS extends CommandBase {
+public class MonitorRPS extends _CommandBase {
 	private double tolerance, targetRPS, delayTime, threshold;
 	private Timer delay;
 	

@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Deploys the intake from the robot
  */
-public class DeployIntake extends CommandBase {
+public class DeployIntake extends _CommandBase {
 
 	/**
 	 * Deploys the intake from the robot

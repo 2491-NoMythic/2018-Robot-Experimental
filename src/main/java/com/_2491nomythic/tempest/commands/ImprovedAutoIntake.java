@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * Automatic intake command for use with multicube autos. Moves the fingers while intaking.
  */
-public class ImprovedAutoIntake extends CommandBase {
+public class ImprovedAutoIntake extends _CommandBase {
 	private Timer timer, accelerateTimer, waitTimer, timeout;
 	private double initialWait;
 	private DriveTime backAway, goBack, creep;

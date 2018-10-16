@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *Runs intake system and cube storage for set power and time
  */
-public class RunIntakeAndStorageTime extends CommandBase {
+public class RunIntakeAndStorageTime extends _CommandBase {
 	private double speed, time;
 	private Timer timer;
 

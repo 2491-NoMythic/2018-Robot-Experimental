@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Toggles talons between coast and brake mode
  */
-public class ToggleCoastMode extends CommandBase {
+public class ToggleCoastMode extends _CommandBase {
 
 	/**
 	 * Toggles talons between coast and brake mode

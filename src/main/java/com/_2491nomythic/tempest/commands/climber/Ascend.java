@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.climber;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  *Runs the climb motors to raise the robot at a given speed for a given time.
  */
-public class Ascend extends CommandBase {
+public class Ascend extends _CommandBase {
 	
 	private double speedL, speedR, time;
 	Timer timer;

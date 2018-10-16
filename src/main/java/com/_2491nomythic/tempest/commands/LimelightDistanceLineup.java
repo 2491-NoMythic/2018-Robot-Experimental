@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  *
  */
-public class LimelightDistanceLineup extends CommandBase {
+public class LimelightDistanceLineup extends _CommandBase {
 	private double speed;
 	private boolean goodToGo;
 

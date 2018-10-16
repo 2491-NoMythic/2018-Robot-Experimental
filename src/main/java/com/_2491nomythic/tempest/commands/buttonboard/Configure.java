@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.buttonboard;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.shooter.ToggleShooterPosition;
 import com._2491nomythic.tempest.settings.ControllerMap;
 import com._2491nomythic.tempest.settings.Variables;
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class Configure extends CommandBase {
+public class Configure extends _CommandBase {
 	private int intakeHeight, shotHeight, state;
 	private ToggleShooterPosition shiftShooter;
 	private Timer timer;

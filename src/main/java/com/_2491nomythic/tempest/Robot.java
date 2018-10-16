@@ -8,7 +8,7 @@
 package com._2491nomythic.tempest;
 
 import com._2491nomythic.tempest.OI.ControllerType;
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.ResetSolenoids;
 import com._2491nomythic.tempest.commands.SetCameraMode;
 import com._2491nomythic.tempest.commands.UpdateDriverstation;
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() { 
 		
-		CommandBase.init();
+		_CommandBase.init();
 		
 		
 		setCamera = new SetCameraMode();

@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.cubestorage;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 
 /**
  * Runs the cube storage motors until the ultrasonic is activated.
  */
-public class UltrasonicCubeHaltManual extends CommandBase {
+public class UltrasonicCubeHaltManual extends _CommandBase {
 	boolean doWeNeedToWorryAboutStoppingOrIsTheUltrasonicSensorAlreadyCovered, nowStopRunningTheMotorsPlease;
 	
 	/**

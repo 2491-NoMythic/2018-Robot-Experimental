@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  *
  */
-public class SetCameraMode extends CommandBase {
+public class SetCameraMode extends _CommandBase {
 
     public SetCameraMode() {
         // Use requires() here to declare subsystem dependencies

@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Constants;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class VelocityTestAuto extends CommandBase {
+public class VelocityTestAuto extends _CommandBase {
 	Timer timer;
 	private int state;
 

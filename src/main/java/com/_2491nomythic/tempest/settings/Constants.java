@@ -44,6 +44,7 @@ public class Constants {
 	public static double shootFeedForwardMed = .00433;
 	public static double shootFeedForwardLow = .0033;
 	public static double shootFeedForwardSwitch = .002;
+	public static double kJoystickThreshHold = 0.05;
 	
 	//Cyclone Shooter Constants
 	//public static final double shootCLeft = .006;

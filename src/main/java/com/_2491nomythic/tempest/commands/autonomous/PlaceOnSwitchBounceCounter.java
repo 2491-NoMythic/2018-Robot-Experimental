@@ -1,7 +1,7 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
 import com._2491nomythic.tempest.commands.AutomaticShoot;
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPosition;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPositionPID;
 import com._2491nomythic.tempest.commands.drivetrain.RotateDrivetrainWithGyroPID;
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Timer;
  * Attempts to place a cube on the correct side of the switch during autonomous.
  * @deprecated
  */
-public class PlaceOnSwitchBounceCounter extends CommandBase {
+public class PlaceOnSwitchBounceCounter extends _CommandBase {
 	private DriveStraightToPositionPID approachCubes, moveTowardsWall, approachSwitch;
 	private DriveStraightToPosition safetyDrive;
 	private RotateDrivetrainWithGyroPID turnTowardsWall, turnTowardsSwitch;

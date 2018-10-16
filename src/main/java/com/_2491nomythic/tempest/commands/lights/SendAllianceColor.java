@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.lights;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 /**
  *
  */
-public class SendAllianceColor extends CommandBase {
+public class SendAllianceColor extends _CommandBase {
 
     public SendAllianceColor() {
         // Use requires() here to declare subsystem dependencies

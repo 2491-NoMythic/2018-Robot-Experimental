@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  *Runs the shooter system for a specified amount of time, and at a specified speed
  */
-public class RunShooterTime extends CommandBase {
+public class RunShooterTime extends _CommandBase {
 	private double speed;
 	private double time;
 	private Timer timer;

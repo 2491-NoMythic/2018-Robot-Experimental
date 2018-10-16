@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  *
  */
-public class AdjustmentMode extends CommandBase {
+public class AdjustmentMode extends _CommandBase {
 
     public AdjustmentMode() {
         // Use requires() here to declare subsystem dependencies

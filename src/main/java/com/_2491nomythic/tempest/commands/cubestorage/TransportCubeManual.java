@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.cubestorage;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 
 
 /**
  *Allows the cube storage to be run manually by the codriver.
  */
-public class TransportCubeManual extends CommandBase {
+public class TransportCubeManual extends _CommandBase {
 	private double currentSpeed;
 	/**
 	 *Allows the cube storage to be run manually by the codriver.

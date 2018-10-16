@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *
  */
-public class DriveVelocityForTime extends CommandBase {
+public class DriveVelocityForTime extends _CommandBase {
 
     public DriveVelocityForTime() {
         // Use requires() here to declare subsystem dependencies

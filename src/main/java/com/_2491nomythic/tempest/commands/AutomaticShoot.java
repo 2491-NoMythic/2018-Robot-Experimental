@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class AutomaticShoot extends CommandBase {
+public class AutomaticShoot extends _CommandBase {
 	private TransportCubeTime fire;
 	private Timer timer;
 	private RunShooterCustom spinUp;

@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Toggles between the deployed and retracted states of the intake
  */
-public class ToggleIntakeDeployment extends CommandBase {
+public class ToggleIntakeDeployment extends _CommandBase {
 
 	/**
 	 * Toggles between the deployed and retracted states of the intake

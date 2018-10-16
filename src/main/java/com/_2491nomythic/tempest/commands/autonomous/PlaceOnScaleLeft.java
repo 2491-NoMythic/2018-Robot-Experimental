@@ -1,7 +1,7 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
 import com._2491nomythic.tempest.commands.AutomaticShoot;
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPositionPID;
 import com._2491nomythic.tempest.commands.drivetrain.RotateDrivetrainWithGyroPID;
 import com._2491nomythic.tempest.settings.Variables;
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
  * Attempts to place a cube on the correct side of the Scale during autonomous, starting in front of DriverStation 1.
  * @deprecated
  */
-public class PlaceOnScaleLeft extends CommandBase {
+public class PlaceOnScaleLeft extends _CommandBase {
 	private DriveStraightToPositionPID driveToCenter, driveToNullZone, approachScale, driveToCorrectSide;
 	private RotateDrivetrainWithGyroPID turnTowardsCenter, turnTowardsNullZone, turnTowardsScale;
 	private AutomaticShoot launchCube;

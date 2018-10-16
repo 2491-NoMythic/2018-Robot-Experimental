@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  *
  */
-public class VelocityPrint extends CommandBase {
+public class VelocityPrint extends _CommandBase {
 
     public VelocityPrint() {
         // Use requires() here to declare subsystem dependencies

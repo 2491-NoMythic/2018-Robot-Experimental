@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Drives the robot straight forward, then stops after a certain distance.
  */
-public class DriveStraightToPosition extends CommandBase {
+public class DriveStraightToPosition extends _CommandBase {
 	double speed, distance, initialPosition;
 
 	/**

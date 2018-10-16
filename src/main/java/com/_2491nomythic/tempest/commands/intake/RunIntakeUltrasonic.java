@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Runs intake motors
  */
-public class RunIntakeUltrasonic extends CommandBase {
+public class RunIntakeUltrasonic extends _CommandBase {
 	private double power;
 
 	/**

@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  *Resets the solenoids to their starting position
  */
-public class ResetSolenoids extends CommandBase {
+public class ResetSolenoids extends _CommandBase {
 	
 	/**
 	 * Resets the solenoids to their starting position

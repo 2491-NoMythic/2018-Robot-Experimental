@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.drivetrain;
  
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * Tunes the derivative value of the robot to be optimal when rotating.
  */
-public class TuneDerivative extends CommandBase {
+public class TuneDerivative extends _CommandBase {
 	private double relativeAngle, targetAngle, maximumAcceptedTime, absoluteError;
 	private Timer maximumTimer, errorTimer;
 	private int i, numberOfTrials, bestTrial;

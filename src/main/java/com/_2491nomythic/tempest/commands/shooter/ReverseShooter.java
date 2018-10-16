@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  *Reverses shooter direction using an operator button
  */
-public class ReverseShooter extends CommandBase {
+public class ReverseShooter extends _CommandBase {
 
     /**
      * Reverses shooter direction using an operator button

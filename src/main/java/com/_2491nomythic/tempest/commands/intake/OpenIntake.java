@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Opens the intake up using pneumatics
  */
-public class OpenIntake extends CommandBase {
+public class OpenIntake extends _CommandBase {
 
 	/**
 	 * Opens the intake up using pneumatics

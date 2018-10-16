@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.buttonboard;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 
 /**
  *
  */
-public class Input extends CommandBase {
+public class Input extends _CommandBase {
 	private int intakeHeight;
 	
     public Input() {

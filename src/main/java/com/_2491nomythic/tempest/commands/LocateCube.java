@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  * Rotates the drivetrain until it has centered on a cube as according to the limelight
  */
-public class LocateCube extends CommandBase {
+public class LocateCube extends _CommandBase {
 	private double leftSpeed, rightSpeed, tolerance;
 	private boolean direction, tune;
 	/**

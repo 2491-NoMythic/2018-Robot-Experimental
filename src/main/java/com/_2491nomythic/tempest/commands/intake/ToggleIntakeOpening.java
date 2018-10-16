@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Toggles between the open and closed states of the intake arms
  */
-public class ToggleIntakeOpening extends CommandBase {
+public class ToggleIntakeOpening extends _CommandBase {
 
 	/**
 	 * Toggles between the open and closed states of the intake arms

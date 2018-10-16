@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.cubestorage;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Runs the cube storage motors until the ultrasonic is activated.
  */
-public class UltrasonicCubeHalt extends CommandBase {
+public class UltrasonicCubeHalt extends _CommandBase {
 	boolean doWeNeedToWorryAboutStoppingOrIsTheUltrasonicSensorAlreadyCovered, nowStopRunningTheMotorsPlease, wouldYouKindlyRunTheAccelerateMotorsBackwardsToPreventThePowerCubeFromGoingTooFar;
 	private double speed;
 	private Timer timer;

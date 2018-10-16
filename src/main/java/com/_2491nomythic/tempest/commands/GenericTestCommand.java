@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  *
  */
-public class GenericTestCommand extends CommandBase {
+public class GenericTestCommand extends _CommandBase {
 
     public GenericTestCommand() {
         // Use requires() here to declare subsystem dependencies

@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.buttonboard;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
 
@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class Output extends CommandBase {
+public class Output extends _CommandBase {
 	private Timer timer;
 
     public Output() {

@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.buttonboard;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *
  */
-public class OpenFingers extends CommandBase {
+public class OpenFingers extends _CommandBase {
 
     public OpenFingers() {
         // Use requires() here to declare subsystem dependencies

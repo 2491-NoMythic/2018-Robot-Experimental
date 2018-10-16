@@ -1,5 +1,5 @@
 package com._2491nomythic.tempest.commands.autonomous;
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.cubestorage.TransportCubeTime;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPosition;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
  *Approaches the switch during autonomous
  *@deprecated
  */
-public class DriveForwardSwitch extends CommandBase {
+public class DriveForwardSwitch extends _CommandBase {
 	private DriveStraightToPosition approachSwitch;
 	private TransportCubeTime load;
 	private boolean left, startingPosition;

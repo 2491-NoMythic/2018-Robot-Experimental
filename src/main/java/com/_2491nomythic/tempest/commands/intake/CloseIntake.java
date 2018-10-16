@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  * Retracts the arms of the intake using pneumatics
  */
-public class CloseIntake extends CommandBase {
+public class CloseIntake extends _CommandBase {
 
 	/**
 	 * Retracts the arms of the intake using pneumatics

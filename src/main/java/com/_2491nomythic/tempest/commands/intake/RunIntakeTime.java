@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Runs intake motors for a specified amount of time
  */
-public class RunIntakeTime extends CommandBase {
+public class RunIntakeTime extends _CommandBase {
 	private double power;
 	private double time;
 	private Timer timer;

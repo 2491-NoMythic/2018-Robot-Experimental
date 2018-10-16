@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.climber;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *Deploys the lineup pins for the climbing subsystem.
  */
-public class DeployLineup extends CommandBase {
+public class DeployLineup extends _CommandBase {
 
 	/**
 	 *Deploys the lineup pins for the climbing subsystem.

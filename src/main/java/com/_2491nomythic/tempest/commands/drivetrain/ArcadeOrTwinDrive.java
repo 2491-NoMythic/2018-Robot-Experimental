@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 import com._2491nomythic.tempest.settings.Variables;
 
@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 /**
  * Allows switching between arcade and twin-stick drive based on controllers present
  */
-public class ArcadeOrTwinDrive extends CommandBase {
+public class ArcadeOrTwinDrive extends _CommandBase {
 	private double lastLeftSpeed, currentLeftSpeed, lastRightSpeed, currentRightSpeed, turnSpeed;
 
 	/**

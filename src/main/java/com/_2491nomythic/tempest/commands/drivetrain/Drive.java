@@ -1,13 +1,13 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  * Drives the robot with linear acceleration as according to input from a driver's controller
  */
-public class Drive extends CommandBase {
+public class Drive extends _CommandBase {
 	private double turnSpeed, currentLeftSpeed, currentRightSpeed, lastLeftSpeed, lastRightSpeed;	
 	
 	/**

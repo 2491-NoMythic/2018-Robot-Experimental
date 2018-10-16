@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.cubestorage.TransportCubeTime;
 import com._2491nomythic.tempest.commands.drivetrain.DrivePath;
 import com._2491nomythic.tempest.commands.drivetrain.DriveTime;
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class AutomaticAuto extends CommandBase {
+public class AutomaticAuto extends _CommandBase {
 	private double mWaitTime;
 	private DrivePath mPath;
 	private DriveTime hitSwitch;

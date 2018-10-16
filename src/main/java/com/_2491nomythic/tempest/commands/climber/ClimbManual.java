@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.climber;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.ControllerMap;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 /**
  *
  */
-public class ClimbManual extends CommandBase {
+public class ClimbManual extends _CommandBase {
 	
 	private double leftSpeed, rightSpeed;
 

@@ -4,7 +4,7 @@ package com._2491nomythic.tempest.commands;
  * Interrupts any other commands running on the robot that require any subsystems
  *
  */
-public class KillSwitch extends CommandBase {
+public class KillSwitch extends _CommandBase {
 	
 	/**
 	 * Interrupts any other commands running on the robot that require any subsystems

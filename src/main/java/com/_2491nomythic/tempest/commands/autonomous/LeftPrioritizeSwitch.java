@@ -1,7 +1,7 @@
 package com._2491nomythic.tempest.commands.autonomous;
 
 import com._2491nomythic.tempest.commands.AutomaticShoot;
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPositionPID;
 import com._2491nomythic.tempest.commands.drivetrain.RotateDrivetrainWithGyroPID;
 import com._2491nomythic.tempest.settings.Variables;
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
  * Attempts to place a cube on either the left scale OR switch, prioritizing switch. If both scale and switch are on the right, the robot crosses the auto line.
  * @deprecated
  */
-public class LeftPrioritizeSwitch extends CommandBase {
+public class LeftPrioritizeSwitch extends _CommandBase {
 	private DriveStraightToPositionPID driveToSwitch, driveToScale, approachSwitch, approachScale;
 	private CrossAutoLine crossLine;
 	private RotateDrivetrainWithGyroPID turnTowardsSwitchOrScale;

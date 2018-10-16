@@ -1,11 +1,11 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 /**
  *Lowers shooter if raised, raises if lowered.
  */
-public class ToggleShooterPosition extends CommandBase {
+public class ToggleShooterPosition extends _CommandBase {
 
 	/**
 	 * Lowers shooter if raised, raises if lowered.

@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  * Runs the right shoot motor PID loop
  * @deprecated
  */
-public class RunRightShootPID extends CommandBase {
+public class RunRightShootPID extends _CommandBase {
 	private PIDController rightShootControl;
 
 	/**

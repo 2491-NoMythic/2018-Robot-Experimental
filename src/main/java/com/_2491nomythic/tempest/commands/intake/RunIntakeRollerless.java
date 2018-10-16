@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Variables;
 
 /**
  *Runs the intake without the roller, though why we would ever want to do that is beyond me
  */
-public class RunIntakeRollerless extends CommandBase {
+public class RunIntakeRollerless extends _CommandBase {
 
     /**
      * Runs the intake without the roller, though why we would ever want to do that is beyond me

@@ -1,12 +1,12 @@
 package com._2491nomythic.tempest.commands.intake;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 
 
 /**
  *Holds the intake open
  */
-public class ToggleFingerWhileHeld extends CommandBase {
+public class ToggleFingerWhileHeld extends _CommandBase {
 
     /**
      * Holds the intake open

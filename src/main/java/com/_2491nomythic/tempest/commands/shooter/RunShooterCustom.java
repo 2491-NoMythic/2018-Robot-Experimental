@@ -1,6 +1,6 @@
 package com._2491nomythic.tempest.commands.shooter;
 
-import com._2491nomythic.tempest.commands.CommandBase;
+import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
 import com._2491nomythic.util.ShooterController;
@@ -8,7 +8,7 @@ import com._2491nomythic.util.ShooterController;
 /**
  *
  */
-public class RunShooterCustom extends CommandBase {
+public class RunShooterCustom extends _CommandBase {
 	private ShooterController shootControl;
 
     public RunShooterCustom() {

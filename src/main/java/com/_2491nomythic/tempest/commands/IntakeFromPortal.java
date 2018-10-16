@@ -3,7 +3,7 @@ package com._2491nomythic.tempest.commands;
 /**
  * Runs shooter motors backwards to intake a cube from the portal
  */
-public class IntakeFromPortal extends CommandBase {
+public class IntakeFromPortal extends _CommandBase {
 
 	/**
 	 * Runs shooter motors backwards to intake a cube from the portal
