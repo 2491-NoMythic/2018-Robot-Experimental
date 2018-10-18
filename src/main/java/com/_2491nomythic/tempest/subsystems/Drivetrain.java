@@ -21,13 +21,12 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 /**
  * The system of motors, solenoids, encoders, and a gyro that allows us to drive the robot
  */
-public class Drivetrain extends PIDSubsystem {
+public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	private TalonSRX leftMaster, leftSlave, rightMaster, rightSlave;
 	private AHRS gyro;
 	private NetworkTable limeLight;
 	private NetworkTableEntry tx, ty, ta, tv;
 	private double currentPIDOutput;
-	public StringBuilder velocity;
 	
 	private static Drivetrain instance;
 	
@@ -60,7 +59,7 @@ public class Drivetrain extends PIDSubsystem {
 			leftSlave = new TalonSRX(Constants.driveTalonLeft2Channel);
 			rightMaster = new TalonSRX(Constants.driveTalonRight1Channel);
 			rightSlave = new TalonSRX(Constants.driveTalonRight2Channel);
-		} 
+		}
 		catch (Exception e) {
 			DriverStation.reportError("TalonSRX instantiation failure! Check CAN Bus, TalonSRX Decive ID's, and TalonSRX power", Variables.debugMode);
 			
@@ -115,7 +114,6 @@ public class Drivetrain extends PIDSubsystem {
 		tv = limeLight.getEntry("tv");
 		
 		resetGyro();
-		velocity = new StringBuilder();
 	}
 	
 	/**
@@ -473,8 +471,10 @@ public class Drivetrain extends PIDSubsystem {
 		limeLight.getEntry("ledMode").setNumber(1);
 		limeLight.getEntry("camMode").setNumber(1);
 	}
-	public String getVelocityGraph() {
-		return velocity.toString();
+
+	@Override
+	public boolean checkSys() {
+		return false;
 	}
 }
 

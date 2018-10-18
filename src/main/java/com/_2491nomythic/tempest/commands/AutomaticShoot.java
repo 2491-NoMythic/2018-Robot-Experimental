@@ -45,7 +45,7 @@ public class AutomaticShoot extends _CommandBase {
     	setSpeed.start();
     }
 
-    // Called repeatedly when this Command is scheduled to run
+	// Called repeatedly when this Command is scheduled to run
     protected void execute() {
     		switch(state) {
     		case 0:

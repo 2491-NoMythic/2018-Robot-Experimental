@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class AutomaticAuto extends _CommandBase {
+public class Automatic extends _CommandBase {
 	private double mWaitTime;
 	private DrivePath mPath;
 	private DriveTime hitSwitch;
@@ -53,7 +53,7 @@ public class AutomaticAuto extends _CommandBase {
 	 * @param priority
 	 * @param crossing
 	 */
-    public AutomaticAuto(StartPosition position, Priority priority, Crossing crossing) {
+    public Automatic(StartPosition position, Priority priority, Crossing crossing) {
     	this.mStartPosition = position;
         this.mPriority = priority;
     	this.mCrossing = crossing;

@@ -1,7 +1,7 @@
 package com._2491nomythic.tempest.commands.drivetrain;
 
 import com._2491nomythic.tempest.commands._CommandBase;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.*;
+import com._2491nomythic.tempest.commands.autonomous.Automatic.*;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
 import com._2491nomythic.tempest.subsystems.Pathing;

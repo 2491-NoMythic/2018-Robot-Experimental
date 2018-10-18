@@ -121,5 +121,10 @@ public class Intake extends Subsystem {
 
 	public void initDefaultCommand() {
 	}
+
+	@Override
+	public void periodic() {
+		super.periodic();
+	}
 }
 

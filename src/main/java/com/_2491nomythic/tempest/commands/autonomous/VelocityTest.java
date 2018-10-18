@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class VelocityTestAuto extends _CommandBase {
+public class VelocityTest extends _CommandBase {
 	Timer timer;
 	private int state;
 
-    public VelocityTestAuto() {
+    public VelocityTest() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(drivetrain);

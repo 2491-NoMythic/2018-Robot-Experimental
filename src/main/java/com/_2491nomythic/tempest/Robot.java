@@ -12,13 +12,11 @@ import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.ResetSolenoids;
 import com._2491nomythic.tempest.commands.SetCameraMode;
 import com._2491nomythic.tempest.commands.UpdateDriverstation;
-import com._2491nomythic.tempest.commands.VelocityPrint;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.Crossing;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.EndPosition;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.Priority;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticAuto.StartPosition;
-import com._2491nomythic.tempest.commands.autonomous.AutomaticTwoCube.SecondCube;
+import com._2491nomythic.tempest.commands.autonomous.Automatic;
+import com._2491nomythic.tempest.commands.autonomous.Automatic.Crossing;
+import com._2491nomythic.tempest.commands.autonomous.Automatic.EndPosition;
+import com._2491nomythic.tempest.commands.autonomous.Automatic.Priority;
+import com._2491nomythic.tempest.commands.autonomous.Automatic.StartPosition;
 import com._2491nomythic.tempest.commands.drivetrain.DrivePath;
 import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPositionPID;
 import com._2491nomythic.tempest.commands.drivetrain.DriveTime;
@@ -54,7 +52,6 @@ public class Robot extends TimedRobot {
 	SendableChooser<StartPosition> m_PositionSelector = new SendableChooser<>();
 	SendableChooser<Priority> m_PrioritySelector = new SendableChooser<>();
 	SendableChooser<Crossing> m_CrossingSelector = new SendableChooser<>();
-	SendableChooser<SecondCube> m_SecondCubeSelector = new SendableChooser<>();
 	SendableChooser<ControllerType> m_ControllerType = new SendableChooser<>();
 
 	public static boolean isTeleop;
@@ -92,9 +89,6 @@ public class Robot extends TimedRobot {
 		m_CrossingSelector.addObject("ON", Crossing.ON);
 		m_CrossingSelector.addObject("FORCE", Crossing.FORCE);
 		
-		m_SecondCubeSelector.addDefault("SWITCH", SecondCube.SWITCH);
-		m_SecondCubeSelector.addObject("SCALE", SecondCube.SCALE);
-		
 		m_ControllerType.addDefault("PS4", ControllerType.PS4);
 		m_ControllerType.addObject("F310", ControllerType.F310);
 		m_ControllerType.addObject("Xbox", ControllerType.Xbox);
@@ -103,7 +97,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Position", m_PositionSelector);
 		SmartDashboard.putData("Priority", m_PrioritySelector);
 		SmartDashboard.putData("Crossing", m_CrossingSelector);
-		SmartDashboard.putData("SecondLocation", m_SecondCubeSelector);
 		SmartDashboard.putData("Controller Type", m_ControllerType);
 		
 		SmartDashboard.putData("DriveStraightToPositionPID", new DriveStraightToPositionPID(5));
@@ -112,8 +105,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("RotateDrivetrainRelative90", new RotateDrivetrainWithGyroPID(90, false));
 		SmartDashboard.putData("RotateDrivetrainRelative-90", new RotateDrivetrainWithGyroPID(-90, false));
 		SmartDashboard.putData("HitSwitch", new DriveTime(-0.3, 0.4, 0.8));
-
-		SmartDashboard.putData("Velocity Path", new VelocityPrint());
 
 		SmartDashboard.putNumber("ProportionalRotate", Variables.proportionalRotate);
 		SmartDashboard.putNumber("DerivativeRotate", Variables.derivativeRotate);
@@ -165,7 +156,7 @@ public class Robot extends TimedRobot {
 		Variables.autoDelay = SmartDashboard.getNumber("AutoDelay", 0);
 		sendColor.start();
 		
-		m_autonomousCommand = new AutomaticAuto(m_PositionSelector.getSelected(), m_PrioritySelector.getSelected(), m_CrossingSelector.getSelected());
+		m_autonomousCommand = new Automatic(m_PositionSelector.getSelected(), m_PrioritySelector.getSelected(), m_CrossingSelector.getSelected());
 		//m_autonomousCommand = new VelocityTestAuto();
 		//m_autonomousCommand = new AutomaticTwoCube(m_PositionSelector.getSelected(), m_PrioritySelector.getSelected(), m_CrossingSelector.getSelected(), m_SecondCubeSelector.getSelected());
 		//updateLights.start();
