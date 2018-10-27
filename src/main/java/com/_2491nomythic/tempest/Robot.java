@@ -11,7 +11,6 @@ import com._2491nomythic.tempest.OI.ControllerType;
 import com._2491nomythic.tempest.commands._CommandBase;
 import com._2491nomythic.tempest.commands.ResetSolenoids;
 import com._2491nomythic.tempest.commands.SetCameraMode;
-import com._2491nomythic.tempest.commands.UpdateDriverstation;
 import com._2491nomythic.tempest.commands.autonomous.Automatic;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.Crossing;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.EndPosition;
@@ -26,6 +25,10 @@ import com._2491nomythic.tempest.commands.lights.SerialConnectivityTest;
 import com._2491nomythic.tempest.commands.lights.UpdateLightsPattern;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
+import com._2491nomythic.tempest.subsystems.Drivetrain;
+import com._2491nomythic.tempest.subsystems.Shooter;
+
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -47,7 +50,7 @@ public class Robot extends TimedRobot {
 	SerialConnectivityTest staticPurple;
 	SetCameraMode setCamera;
 	SendAllianceColor sendColor;
-	UpdateDriverstation updateDriverstation;
+	Preferences pref;
 	
 	SendableChooser<StartPosition> m_PositionSelector = new SendableChooser<>();
 	SendableChooser<Priority> m_PrioritySelector = new SendableChooser<>();
@@ -64,17 +67,15 @@ public class Robot extends TimedRobot {
 	public void robotInit() { 
 		
 		_CommandBase.init();
-		
+		//pref.getDouble(key, backup);
 		
 		setCamera = new SetCameraMode();
 		staticPurple = new SerialConnectivityTest();
 		sendColor = new SendAllianceColor();
-		updateDriverstation = new UpdateDriverstation();
 		updateLights = new UpdateLightsPattern();
 		resetSolenoids = new ResetSolenoids();
 		
 		
-		updateDriverstation.start();
 		updateLights.start();
 		
 		m_PositionSelector.addObject("LEFT", StartPosition.LEFT);
@@ -131,13 +132,13 @@ public class Robot extends TimedRobot {
 		isTeleop = false;
 		updateLights.cancel();
 		staticPurple.start();
+		setCamera.start();
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		
-		setCamera.start();
+		outputToSmartDashboard();
 	}
 
 	/**
@@ -176,6 +177,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		outputToSmartDashboard();
 	}
 
 	@Override
@@ -201,6 +203,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		outputToSmartDashboard();
 	}
 
 	/**
@@ -208,5 +211,26 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	public void outputToSmartDashboard() {
+		SmartDashboard.putNumber("Gyro Angle", Drivetrain.getInstance().getGyroAngle());
+		SmartDashboard.putBoolean("ShooterReadyToFire", Variables.readyToFire);
+		SmartDashboard.putNumber("LeftShootRPS", Shooter.getInstance().getLeftShootVelocity());
+		SmartDashboard.putNumber("RightShootRPS", Shooter.getInstance().getRightShootVelocity());
+		SmartDashboard.putNumber("Pathing Gyro", -Drivetrain.getInstance().getRawGyroAngle());
+		SmartDashboard.putNumber("GyroPitchMeasure", Drivetrain.getInstance().getPitchAngle());
+
+		Variables.derivativeRotate = SmartDashboard.getNumber("DerivateRotate", Variables.derivativeRotate);
+		Variables.proportionalRotate = SmartDashboard.getNumber("ProportionalRotate", Variables.proportionalRotate);
+		Variables.proportionalForward = SmartDashboard.getNumber("ProportionalForward", Variables.proportionalForward);
+		Variables.derivativeForward = SmartDashboard.getNumber("DerivativeForward", Variables.derivativeForward);
+		Variables.driveDefault = SmartDashboard.getNumber("DriveDefault", 1);
+		Constants.shooterHighScaleRPS = SmartDashboard.getNumber("HighScaleRPS", Constants.shooterHighScaleRPS);
+		Constants.shooterMediumScaleRPS = SmartDashboard.getNumber("MedScaleRPS", Constants.shooterMediumScaleRPS);
+		Constants.shooterLowScaleRPS = SmartDashboard.getNumber("LowScaleRPS", Constants.shooterLowScaleRPS);
+		Constants.shooterSwitchRPS = SmartDashboard.getNumber("SwitchRPS", Constants.shooterSwitchRPS);
+            
+		Drivetrain.getInstance().chooseDefaultCommand(Variables.driveDefault);
 	}
 }
