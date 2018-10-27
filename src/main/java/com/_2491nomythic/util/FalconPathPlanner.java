@@ -678,7 +678,7 @@ public class FalconPathPlanner
 		double[][] output = path.calculate(waypoints[0], waypoints[1][0][0], waypoints[1][0][1], Constants.robotTrackWidth);
 
 		System.out.println("Calculation time: " + (System.currentTimeMillis()-start) + "ms\nSteps: " + output.length);
-		//path.print(test, "test"); //enable for console output
+		//path.print(output, "test"); //enable for console output
 
 
 		if(!GraphicsEnvironment.isHeadless())

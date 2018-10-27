@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("MedScaleRPS", Constants.shooterMediumScaleRPS);
 		SmartDashboard.putNumber("HighScaleRPS", Constants.shooterHighScaleRPS);
 		SmartDashboard.putNumber("GyroPitchMeasure", 0);
-		SmartDashboard.putData("Backup", new DrivePath(StartPosition.LEFT_SWITCH, EndPosition.BACKUP, 0, false));
+		SmartDashboard.putData("Backup", new DrivePath(StartPosition.LEFT_SWITCH, EndPosition.BACKUP, false));
 		System.out.println("Boot Successful");
 	}
 
@@ -167,7 +167,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
-		
+
 		isTeleop = false;
 	}
 

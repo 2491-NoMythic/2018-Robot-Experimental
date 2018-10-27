@@ -19,7 +19,6 @@ public abstract class _CommandBase extends Command {
 	protected static Shooter shooter;
 	protected static CubeStorage cubeStorage;
 	protected static SickLights sickLights;
-	protected static Pathing pathing;
 	protected static FalconPathPlanner pathPlanner;
 	
 	public static void init() {
@@ -30,7 +29,6 @@ public abstract class _CommandBase extends Command {
 		shooter = Shooter.getInstance();
 		cubeStorage = CubeStorage.getInstance();
 		sickLights = SickLights.getInstance();
-		pathing = Pathing.getInstance();
 		pathPlanner = FalconPathPlanner.getInstance();
 		
 		/* 

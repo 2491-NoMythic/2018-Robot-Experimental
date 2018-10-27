@@ -9,10 +9,9 @@ import com._2491nomythic.tempest.settings.Variables;
  * A command for streaming a selected TalonSRX Velocity mode path
  */
 public class DrivePath extends _CommandBase {
-	private int mCurrentStep, mTimeCounter, directionModifer, headingModifier, mLength, stepCounter, leftIndex, rightIndex;
+	private int mCurrentStep, directionModifer, headingModifier, mLength, leftIndex, rightIndex;
 	private EndPosition path;
 	private double mInitialHeading, mHeadingDiffrence, mTurnAdjustment, mAdjustedLeftVelocity, mAdjustedRightVelocity;
-	private String mSelectedPath;
 	private boolean reverse;
 	/**
 	 * 
@@ -20,17 +19,16 @@ public class DrivePath extends _CommandBase {
 	 * @param endPosition a robot {@linkplain EndPosition} with respect to the field
 	 * @author Emilio Lobo
 	 */
-    public DrivePath(StartPosition startPosition, EndPosition endPosition, int stepCounter, boolean reverse) {
+    public DrivePath(StartPosition startPosition, EndPosition endPosition, boolean reverse) {
     	
     	requires(drivetrain);
     	
-		this.stepCounter = stepCounter;
 		this.reverse = reverse;
-		this.headingModifier = startPosition.getHeadingModifier();
-		this.directionModifer = startPosition.getDirectionModifer();
-		this.leftIndex = startPosition.getLeftIndex();
-		this.rightIndex = startPosition.getRightIndex();
-		this.path = endPosition;	
+		headingModifier = startPosition.getHeadingModifier();
+		directionModifer = startPosition.getDirectionModifer();
+		leftIndex = startPosition.getLeftIndex();
+		rightIndex = startPosition.getRightIndex();
+		path = endPosition;	
     }
 
     protected void initialize() {
@@ -39,42 +37,19 @@ public class DrivePath extends _CommandBase {
     }
 
     protected void execute() {
-    	if(reverse) {
-    		if(mTimeCounter == stepCounter) {
-        		
-    			adjustVelocities();
-    		
-    			drivetrain.driveVelocity(mAdjustedLeftVelocity , mAdjustedRightVelocity);
-			        		
-				mTimeCounter = 0;
-				mCurrentStep++;
-				mCurrentStep = mLength - mCurrentStep;
-			
-			} 
-			else {
-				mTimeCounter++;
-			}
-    		
-    	} else {
-    		
-    		if(mTimeCounter == stepCounter) {
-    		
-    			adjustVelocities();
-    		
-    			drivetrain.driveVelocity(mAdjustedLeftVelocity , mAdjustedRightVelocity);
-			        		
-				mTimeCounter = 0;
-				mCurrentStep++;
-			
-			} 
-			else {
-				mTimeCounter++;
-			}
-    	}
+		adjustVelocities();
+
+		drivetrain.driveVelocity(mAdjustedLeftVelocity , mAdjustedRightVelocity);
+
+		if (reverse) {
+			mCurrentStep--;
+		} else {
+			mCurrentStep++;
+		}
     }
 
     protected boolean isFinished() {
-        return mCurrentStep == mLength;
+        return mCurrentStep == mLength || mCurrentStep == 0; //TODO test this
     }
 
     protected void end() {
@@ -104,10 +79,12 @@ public class DrivePath extends _CommandBase {
     }
     
     private synchronized void resetVariables() {
-    	mInitialHeading = drivetrain.getRawGyroAngle();
-    	mCurrentStep = 0;
-		mTimeCounter = 4;
-		mTimeCounter = 0;
+		mInitialHeading = drivetrain.getRawGyroAngle();
 		mLength = path.pathLength();
+		if(reverse) {
+			mCurrentStep = mLength;					
+		} else {
+			mCurrentStep = 0;
+		}
     }
 }

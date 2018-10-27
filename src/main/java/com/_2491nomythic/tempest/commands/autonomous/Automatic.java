@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Automatic extends _CommandBase {
 	private int mPathLength;
+	@SuppressWarnings("unused")
 	private double mWaitTime;
 	private DrivePath mPath;
 	private DriveTime hitSwitch;
@@ -160,7 +161,7 @@ public class Automatic extends _CommandBase {
     	timerSafety = false;
     	
     	selectEndPosition(mStartPosition);
-		mPath = new DrivePath(mStartPosition, mEndPosition, 0, false);
+		mPath = new DrivePath(mStartPosition, mEndPosition, false);
 		mPathLength = mEndPosition.pathLength();
 
 		mTimer.reset();

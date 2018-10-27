@@ -79,11 +79,13 @@ public final class Constants {
 	/* Auto Paths */
 	public static final double kVelocitykG = 0.05;
 
-	private static final double leftStartPos = 24.6-0.93; //feet
+	//private static final double leftStartPos = 24.6-0.93; //feet
 	private static final double rightStartPos = 2.4+0.93;
 	private static final double centerStartPos = 14.5-0.99;
 	private static final double robotLength = 3.16667;
 	public static final double robotTrackWidth = 2; //distance between left and right wheels, feet
+
+	private static final double kDefaultTimeStep = 0.02; // 20ms
 
 	public static final double[][][] CROSS_LINE= {
 		{
@@ -91,11 +93,8 @@ public final class Constants {
 			{0,rightStartPos},
 			{8,rightStartPos}
 		},
-		{
-			{
-				//totalTime, timeStep (both in seconds)
-				10, 10
-			}
+		{ 	//totalTime, timeStep (both in seconds)
+			{10, kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] SWITCH = {
@@ -106,7 +105,7 @@ public final class Constants {
 			{10.5,8}
 		},
 		{
-			{10, 10}
+			{10, kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] LEFT_SWITCH = {
@@ -117,7 +116,7 @@ public final class Constants {
 			{14-3.82667,19}//-3.16667
 		},
 		{
-			{4, .02}
+			{4, kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] RIGHT_SWITCH = {
@@ -128,7 +127,7 @@ public final class Constants {
 			{14-3.16667,9}
 		},
 		{
-			{4,.02}
+			{4,kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] OPPOSITE_SWTICH = null;
@@ -140,7 +139,7 @@ public final class Constants {
 			{20,9.3}
 		},
 		{
-			{10, 10}
+			{10, kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] OPPOSITE_SCALE = {
@@ -151,7 +150,7 @@ public final class Constants {
 			{24-robotLength,27}
 		},
 		{
-			{10, 10}
+			{10, kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] BUMP_COUNTER = null;
