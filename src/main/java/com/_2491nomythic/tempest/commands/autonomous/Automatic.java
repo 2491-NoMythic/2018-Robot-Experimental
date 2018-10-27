@@ -7,7 +7,6 @@ import com._2491nomythic.tempest.commands.drivetrain.DriveTime;
 import com._2491nomythic.tempest.commands.shooter.RunShooterCustom;
 import com._2491nomythic.tempest.commands.shooter.SetShooterSpeed;
 import com._2491nomythic.tempest.settings.Constants;
-import com._2491nomythic.tempest.subsystems.Pathing;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
@@ -16,6 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class Automatic extends _CommandBase {
+	private int mPathLength;
 	private double mWaitTime;
 	private DrivePath mPath;
 	private DriveTime hitSwitch;
@@ -27,19 +27,105 @@ public class Automatic extends _CommandBase {
 	private Timer mTimer;
 	
 	public static enum StartPosition {
-		LEFT, CENTER, RIGHT, CROSS_LINE, LEFT_NULL, RIGHT_NULL, LEFT_CUBE, RIGHT_CUBE, LEFT_SWITCH, RIGHT_SWITCH, LEFT_BACKUP, RIGHT_BACKUP, LEFT_PYRAMID, RIGHT_PYRAMID;
+		LEFT(true, true), 
+		CENTER(false, false), 
+		RIGHT(false, true), 
+		CROSS_LINE(true, false), //after this line, values need verification 
+		LEFT_NULL(false, false),
+		RIGHT_NULL(false, false), 
+		LEFT_CUBE(false, false), 
+		RIGHT_CUBE(false, false), 
+		LEFT_SWITCH(false, false), 
+		RIGHT_SWITCH(false, false), 
+		LEFT_BACKUP(false, false), 
+		RIGHT_BACKUP(false, false), 
+		LEFT_PYRAMID(false, false), 
+		RIGHT_PYRAMID(false, false);
+
+		private int mHeadingModifer;
+		private int mDirectionModifier;
+		private int mRightIndex;
+		private int mLeftIndex;
+
+		StartPosition(boolean left, boolean reversed) {
+			mHeadingModifer = left ? -1 : 1;
+			mLeftIndex = left ? 2 : 1;
+			mRightIndex = left ? 1 : 2;
+			mDirectionModifier = reversed ? -1 : 1;
+		}
+
+		public int getHeadingModifier() {
+			return mHeadingModifer;
+		}
+
+		public int getDirectionModifer() {
+			return mDirectionModifier;
+		}
+
+		public int getRightIndex() {
+			return mRightIndex;
+		}
+
+		public int getLeftIndex() {
+			return mLeftIndex;
+		}
 	}
 	
 	public static enum EndPosition {
-		SWITCH, LEFT_SWITCH, RIGHT_SWITCH, OPPOSITE_SWTICH, SCALE, OPPOSITE_SCALE, CROSS_LINE, BUMP_COUNTER, MAX, CUBE, NULL, BACKUP, LEFT_PYRAMID, RIGHT_PYRAMID, SECOND_LEFT_SWITCH, SECOND_RIGHT_SWITCH;
+		CROSS_LINE(Constants.CROSS_LINE), 
+		SWITCH(Constants.SWITCH), 
+		LEFT_SWITCH(Constants.LEFT_SWITCH), 
+		RIGHT_SWITCH(Constants.RIGHT_SWITCH), 
+		OPPOSITE_SWTICH(Constants.OPPOSITE_SWTICH), 
+		SCALE(Constants.SCALE), 
+		OPPOSITE_SCALE(Constants.OPPOSITE_SCALE), 
+		BUMP_COUNTER(Constants.BUMP_COUNTER), 
+		MAX(Constants.MAX), 
+		CUBE(Constants.CUBE), 
+		NULL(Constants.NULL), 
+		BACKUP(Constants.BACKUP), 
+		LEFT_PYRAMID(Constants.LEFT_PYRAMID), 
+		RIGHT_PYRAMID(Constants.RIGHT_PYRAMID), 
+		SECOND_LEFT_SWITCH(Constants.SECOND_LEFT_SWITCH), 
+		SECOND_RIGHT_SWITCH(Constants.SECOND_RIGHT_SWITCH);
+
+		private final double[][] calculatedPath;
+
+		/**
+		 * 
+		 * @param name
+		 * @param waypoints
+		 * @param totalTime
+		 * @param timeStep
+		 */
+		EndPosition(double[][][] waypointsData) {
+			this.calculatedPath = pathPlanner.calculate(waypointsData[0], waypointsData[1][0][0], waypointsData[1][0][1], Constants.robotTrackWidth);
+		}
+
+		public double headingStep(int step) {
+			return calculatedPath[step][0];
+		}
+		/**
+		 * 
+		 * @param timeStep destired time step
+		 * @param index 1 for left, 2 for right. Pull this from the {@link StartPosition} getIndex method
+		 * @return Velocity for the given side and timeStep
+		 */
+		public double velocityStep(int timeStep, int index) {
+			return calculatedPath[timeStep][index];
+		}
+
+		public int pathLength() {
+			return calculatedPath.length;
+		}
 	}
 	
 	public static enum Priority {
-		SCALE, SWITCH
+		SCALE, SWITCH;
 	}
 	
 	public static enum Crossing {
-		OFF, ON, FORCE
+		OFF, ON, FORCE;
 	}
 	
 	private StartPosition mStartPosition;
@@ -74,49 +160,46 @@ public class Automatic extends _CommandBase {
     	timerSafety = false;
     	
     	selectEndPosition(mStartPosition);
+		mPath = new DrivePath(mStartPosition, mEndPosition, 0, false);
+		mPathLength = mEndPosition.pathLength();
 
-    	if(mEndPosition == EndPosition.LEFT_SWITCH || mEndPosition == EndPosition.RIGHT_SWITCH || mEndPosition == EndPosition.CROSS_LINE || mEndPosition == EndPosition.SWITCH || mEndPosition == EndPosition.OPPOSITE_SCALE) {
-    		mPath = new DrivePath(mStartPosition, mEndPosition, 4, false);
-    	}
-    	else {
-    		mPath = new DrivePath(mStartPosition, mEndPosition, 0, false); //mEndPosition
-    	}
 		mTimer.reset();
 		mTimer.stop();
 		
-		mPath.start();	
+		mPath.start();		
     }
 
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {	
-	    switch(mEndPosition) {	    	
+	    int currentStep = mPath.getCurrentStep();
+		switch (mEndPosition) {
 	    	case OPPOSITE_SCALE:
-	    		if(mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_OPPOSITE_SCALE").length - 12 || mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_OPPOSITE_SCALE").length - 13) {
+	    		if(currentStep == mPathLength - 12 || currentStep == mPathLength - 13) {
 		   			intake.openArms();
 		   			shooter.setScalePosition();
 		   			mWaitTime = 0.1;
-		   		} else if(mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_OPPOSITE_SCALE").length - 17 || mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_OPPOSITE_SCALE").length - 18) {
+		   		} else if(currentStep == mPathLength - 17 || currentStep == mPathLength - 18) {
 		   			mSetScaleSpeed.start();
 		   			mRevShoot.start();
 		   		}
 		   		break;
-		   	case SCALE:		    		
-		   		if(mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_SCALE").length - 60 || mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_SCALE").length - 61) {	
+		   	case SCALE:
+		   		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {	
 		   			intake.openArms();
 		   			shooter.setScalePosition();
 		   			mWaitTime = 0.1;
-		   		} else if(mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_SCALE").length - 85 || mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_SCALE").length - 86) {
+		   		} else if(currentStep == mPathLength - 85 || currentStep == mPathLength - 86) {
 		   			mSetScaleSpeed.start();		    			
 	    			mRevShoot.start();
 	    		}
 	    		break;
 	    	case NULL:
-	    		if(mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_NULL").length - 60 || mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_NULL").length - 61) {	
+	    		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {	
 	    			intake.openArms();
 	    			shooter.setScalePosition();
 	    			mWaitTime = 0.1;
-	    		} else if(mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_NULL").length - 85 || mPath.getCurrentStep() == Pathing.getVelocityArray("leftVelocitiesTO_NULL").length - 86) {
+	    		} else if(currentStep == mPathLength - 85 || currentStep == mPathLength - 86) {
 	    			mSetScaleSpeed.start();
 	    			mRevShoot.start();
 	    		}
@@ -209,11 +292,6 @@ public class Automatic extends _CommandBase {
 				mEndPosition = EndPosition.OPPOSITE_SCALE;
 			}
 			break;
-			
-		default:
-			System.out.println("Unexpected value for GameSpecificMessage: " + mGameData);
-			end();
-			break;
 		case "LR":
 			if (mStartPosition == StartPosition.CENTER) {
 				mEndPosition = EndPosition.LEFT_SWITCH;
@@ -244,7 +322,10 @@ public class Automatic extends _CommandBase {
 				mEndPosition = EndPosition.SWITCH;
 			}
 			break;
-			
+		default:
+			System.out.println("Unexpected value for GameSpecificMessage: " + mGameData);
+			end();
+			break;
 		}
     	System.out.println("Selected EndPosition: " + mEndPosition);
     }

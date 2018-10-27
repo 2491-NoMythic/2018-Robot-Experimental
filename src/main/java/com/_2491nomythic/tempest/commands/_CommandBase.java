@@ -2,6 +2,7 @@ package com._2491nomythic.tempest.commands;
 
 import com._2491nomythic.tempest.OI;
 import com._2491nomythic.tempest.subsystems.*;
+import com._2491nomythic.util.FalconPathPlanner;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +20,7 @@ public abstract class _CommandBase extends Command {
 	protected static CubeStorage cubeStorage;
 	protected static SickLights sickLights;
 	protected static Pathing pathing;
+	protected static FalconPathPlanner pathPlanner;
 	
 	public static void init() {
 		oi = new OI();
@@ -29,6 +31,7 @@ public abstract class _CommandBase extends Command {
 		cubeStorage = CubeStorage.getInstance();
 		sickLights = SickLights.getInstance();
 		pathing = Pathing.getInstance();
+		pathPlanner = FalconPathPlanner.getInstance();
 		
 		/* 
 		This MUST be here. If the OI creates Commands (which it very likely

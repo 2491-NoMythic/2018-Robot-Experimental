@@ -2,11 +2,10 @@ package com._2491nomythic.util;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com._2491nomythic.tempest.settings.Constants;
 
 
 
@@ -39,40 +38,47 @@ public class FalconPathPlanner
 {
 
 	//Path Variables
-	public double[][] origPath;
-	public double[][] nodeOnlyPath;
-	public double[][] smoothPath;
-	public double[][] leftPath;
-	public double[][] rightPath;
+	private double[][] origPath;
+	private double[][] nodeOnlyPath;
+	private double[][] smoothPath;
+	private double[][] leftPath;
+	private double[][] rightPath;
 
 	//Orig Velocity
-	public double[][] origCenterVelocity;
-	public double[][] origRightVelocity;
-	public double[][] origLeftVelocity;
+	private double[][] origCenterVelocity;
+	private double[][] origRightVelocity;
+	private double[][] origLeftVelocity;
 
 	//smooth velocity
-	public double[][] smoothCenterVelocity;
-	public double[][] smoothRightVelocity;
-	public double[][] smoothLeftVelocity;
+	private double[][] smoothCenterVelocity;
+	private double[][] smoothRightVelocity;
+	private double[][] smoothLeftVelocity;
 
 	//accumulated heading
-	public double[][] heading;
+	private double[][] heading;
 
 	double totalTime;
 	double totalDistance;
 	double numFinalPoints;
 
-	double pathAlpha;
-	double pathBeta;
-	double pathTolerance;
+	private double pathAlpha;
+	private double pathBeta;
+	private double pathTolerance;
 
-	double velocityAlpha;
-	double velocityBeta;
-	double velocityTolerance;
+	private double velocityAlpha;
+	private double velocityBeta;
+	private double velocityTolerance;
 	
 	static StringBuilder _sb;
 
+	private static FalconPathPlanner instance;
 
+	public static FalconPathPlanner getInstance() {
+		if(instance == null) {
+			instance = new FalconPathPlanner();
+		}
+		return instance;
+	}
 	/**
 	 * Constructor, takes a Path of Way Points defined as a double array of column vectors representing the global
 	 * cartesian points of the path in {x,y} coordinates. The waypoint are traveled from one point to the next in sequence.
@@ -93,10 +99,8 @@ public class FalconPathPlanner
 		The units of these coordinates are position units assumed by the user (i.e inch, foot, meters) 
 	 * @param path
 	 */
-	public FalconPathPlanner(double[][] path)
+	private FalconPathPlanner()
 	{
-		this.origPath = doubleArrayCopy(path);
-
 		//default values DO NOT MODIFY;
 		pathAlpha = 0.7;
 		pathBeta = 0.3;
@@ -106,55 +110,12 @@ public class FalconPathPlanner
 		velocityBeta = 0.3;
 		velocityTolerance = 0.0000001;
 	}
-	
-	 public static int[] answer(int[] data, int n) { 
-
-		 int mLimit;
-		    int[] mOut;
-		    ArrayList<Integer> mData;		        
-			    mLimit = n;
-				mData = new ArrayList<Integer>();
-				
-				/**
-				 * loops through the array to convert it into a ArrayList.
-				 */
-				for (int i : data) {
-					mData.add(i);
-				}
-				
-				/**
-				 * Loops through the data and removes integers with a recurance count over mLimit.
-				 */
-			    for (int i : data) {
-				    if (Collections.frequency(mData, i) > mLimit) {
-						mData.removeIf(s -> s.equals(i));
-			        }
-				}
-				
-				/**
-				 * Steams and maps the data to convert back into the desired return type of int[].
-				 */
-				mOut = mData.stream().mapToInt(i -> i).toArray();
-				return mOut;
-		        
-	        
-	 }
-
-	public static void print(int[] arrayList)
-	{
-		System.out.println("X: \t Y:");
-
-		for(int u: arrayList)
-			System.out.println(u);
-	}
-
-
 
 	/**
 	 * Prints Cartesian Coordinates to the System Output as Column Vectors in the Form X	Y
 	 * @param path
 	 */
-	public static void print(double[][] path)
+	public void print(double[][] path)
 	{
 		System.out.println("X: \t Y:");
 
@@ -167,7 +128,7 @@ public class FalconPathPlanner
 	 * @param path the desired path to print
 	 * @param name an identifying name for the path
 	 */
-	public static void print(double[][] path, String name)
+	public void print(double[][] path, String name)
 	{
 		_sb = new StringBuilder();
 		System.out.println(name + ":");
@@ -175,7 +136,7 @@ public class FalconPathPlanner
 		_sb.append("{");
 
 		for(double[] u: path)
-			_sb.append("{" + u[0] + "," + u[1] + "},");
+			_sb.append("{" + u[0] + "," + u[1] + "," + u[2] + "},");
 		
 		_sb.deleteCharAt(_sb.length() - 1);
 		_sb.append("};");
@@ -191,7 +152,7 @@ public class FalconPathPlanner
 	 * @param arr
 	 * @return
 	 */
-	public static double[][] doubleArrayCopy(double[][] arr)
+	private static double[][] doubleArrayCopy(double[][] arr)
 	{
 
 		//size first dimension of array
@@ -220,7 +181,7 @@ public class FalconPathPlanner
 	 * @param numToInject
 	 * @return
 	 */
-	public double[][] inject(double[][] orig, int numToInject)
+	private double[][] inject(double[][] orig, int numToInject)
 	{
 		double morePoints[][];
 
@@ -271,7 +232,7 @@ public class FalconPathPlanner
 	 * @param tolerance
 	 * @return
 	 */
-	public double[][] smoother(double[][] path, double weight_data, double weight_smooth, double tolerance)
+	private double[][] smoother(double[][] path, double weight_data, double weight_smooth, double tolerance)
 	{
 
 		//copy array
@@ -302,7 +263,7 @@ public class FalconPathPlanner
 	 * @param path
 	 * @return
 	 */
-	public static double[][] nodeOnlyWayPoints(double[][] path)
+	private static double[][] nodeOnlyWayPoints(double[][] path)
 	{
 
 		List<double[]> li = new LinkedList<double[]>();
@@ -337,7 +298,6 @@ public class FalconPathPlanner
 		return temp;
 	}
 
-
 	/**
 	 * Returns Velocity as a double array. The First Column vector is time, based on the time step, the second vector 
 	 * is the velocity magnitude.
@@ -347,7 +307,7 @@ public class FalconPathPlanner
 	 * @param timeStep
 	 * @return
 	 */
-	double[][] velocity(double[][] smoothPath, double timeStep)
+	private double[][] velocity(double[][] smoothPath, double timeStep)
 	{
 		double[] dxdt = new double[smoothPath.length];
 		double[] dydt = new double[smoothPath.length];
@@ -390,7 +350,7 @@ public class FalconPathPlanner
 	 * @param tolerance
 	 * @return
 	 */
-	double[][] velocityFix(double[][] smoothVelocity, double[][] origVelocity, double tolerance)
+	private double[][] velocityFix(double[][] smoothVelocity, double[][] origVelocity, double tolerance)
 	{
 
 		/*pseudo
@@ -433,7 +393,6 @@ public class FalconPathPlanner
 
 	}
 
-
 	/**
 	 * This method calculates the integral of the Smooth Velocity term and compares it to the Integral of the 
 	 * original velocity term. In essence we are comparing the total distance by the original velocity path and 
@@ -472,6 +431,7 @@ public class FalconPathPlanner
 
 		return difference;
 	}
+
 	/**
 	 * This method calculates the optimal parameters for determining what amount of nodes to inject into the path
 	 * to meet the time restraint. This approach uses an iterative process to inject and smooth, yielding more desirable
@@ -483,7 +443,7 @@ public class FalconPathPlanner
 	 * @param maxTimeToComplete
 	 * @param timeStep
 	 */
-	public int[] injectionCounter2Steps(double numNodeOnlyPoints, double maxTimeToComplete, double timeStep)
+	private int[] injectionCounter2Steps(double numNodeOnlyPoints, double maxTimeToComplete, double timeStep)
 	{
 		int first = 0;
 		int second = 0;
@@ -550,15 +510,16 @@ public class FalconPathPlanner
 
 		return ret;
 	}
-/**
- * Calculates the left and right wheel paths based on robot track width
- * 
- * Big O: 2N
- * 
- * @param smoothPath - center smooth path of robot
- * @param robotTrackWidth - width between left and right wheels of robot of skid steer chassis. 
- */
-	public void leftRight(double[][] smoothPath, double robotTrackWidth)
+
+	/**
+ 	 * Calculates the left and right wheel paths based on robot track width
+	 * 
+	 * Big O: 2N
+	 * 
+	 * @param smoothPath - center smooth path of robot
+	 * @param robotTrackWidth - width between left and right wheels of robot of skid steer chassis. 
+	 */
+	private void leftRight(double[][] smoothPath, double robotTrackWidth)
 	{
 
 		double[][] leftPath = new double[smoothPath.length][2];
@@ -602,49 +563,6 @@ public class FalconPathPlanner
 		this.leftPath = leftPath;
 		this.rightPath = rightPath;
 	}
-	
-	/**
-	 * Returns the first column of a 2D array of doubles
-	 * @param arr 2D array of doubles
-	 * @return array of doubles representing the 1st column of the initial parameter
-	 */
-
-	public static double[] getXVector(double[][] arr)
-	{
-		double[] temp = new double[arr.length];
-
-		for(int i=0; i<temp.length; i++)
-			temp[i] = arr[i][0];
-
-		return temp;		
-	}
-
-	/**
-	 * Returns the second column of a 2D array of doubles
-	 * 
-	 * @param arr 2D array of doubles
-	 * @return array of doubles representing the 1st column of the initial parameter
-	 */
-	public static double[] getYVector(double[][] arr)
-	{
-		double[] temp = new double[arr.length];
-
-		for(int i=0; i<temp.length; i++)
-			temp[i] = arr[i][1];
-
-		return temp;		
-	}
-
-	public static double[][] transposeVector(double[][] arr)
-	{
-		double[][] temp = new double[arr[0].length][arr.length];
-
-		for(int i=0; i<temp.length; i++)
-			for(int j=0; j<temp[i].length; j++)
-				temp[i][j] = arr[j][i];
-
-		return temp;		
-	}
 
 	public void setPathAlpha(double alpha)
 	{
@@ -670,8 +588,9 @@ public class FalconPathPlanner
 	 * @param totalTime - time the user wishes to complete the path in seconds. (this is the maximum amount of time the robot is allowed to take to traverse the path.)
 	 * @param timeStep - the frequency at which the robot controller is running on the robot. 
 	 * @param robotTrackWidth - distance between left and right side wheels of a skid steer chassis. Known as the track width.
+	 * @return double array with [timeStep] in the first demension and [headings, leftVelocity, rightVelocity] in the second
 	 */
-	public void calculate(double totalTime, double timeStep, double robotTrackWidth)
+	public double[][] calculate(double[][] path,double totalTime, double timeStep, double robotTrackWidth)
 	{
 		/**
 		 * pseudo code
@@ -685,6 +604,8 @@ public class FalconPathPlanner
 
 
 		//first find only direction changing nodes
+		this.origPath = doubleArrayCopy(path);
+
 		nodeOnlyPath = nodeOnlyWayPoints(origPath);
 
 		//Figure out how many nodes to inject
@@ -731,152 +652,34 @@ public class FalconPathPlanner
 		smoothCenterVelocity = velocityFix(smoothCenterVelocity, origCenterVelocity, 0.0000001);
 		smoothLeftVelocity = velocityFix(smoothLeftVelocity, origLeftVelocity, 0.0000001);
 		smoothRightVelocity = velocityFix(smoothRightVelocity, origRightVelocity, 0.0000001);
+
+		return joinPaths(heading, smoothLeftVelocity, smoothRightVelocity);
+	}
+
+	private double[][] joinPaths(double[][] heading, double[][] smoothLeftVelocity, double[][] smoothRightVelocity) {
+		double[][] finalPath = new double[heading.length][3];
+		for(int i = 0; i < heading.length; i++) {
+			finalPath[i][0] = heading[i][1];
+			finalPath[i][1] = smoothLeftVelocity[i][1];
+			finalPath[i][2] = smoothRightVelocity[i][1];
+		}
+		return finalPath;
 	}
 
 	//main program
 	public static void main(String[] args)
 	{
+		FalconPathPlanner path = new FalconPathPlanner();
+
 		long start = System.currentTimeMillis();
 		//System.setProperty("java.awt.headless", "true"); //enable this to true to emulate roboRio environment
-		
-		double leftStartPos = 24.6-0.93;
-		double rightStartPos = 2.4+0.93;
-		double centerStartPos = 14.5-0.99;
-		double robotLength = 3.16667;
-		double totalTime = 3.1; //seconds
-		double timeStep = 0.02; //period of control loop on Rio, seconds
-		double robotTrackWidth = 2; //distance between left and right wheels, feet
-		
-		@SuppressWarnings("unused")
-		double[][] switchCenterLeft = new double[][]{
-			{0,centerStartPos},
-			{3,centerStartPos},
-			{8,19},
-			{14-3.82667,19}//-3.16667
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] switchCenterRight = new double[][] {
-			{0,centerStartPos},
-			{3,centerStartPos},
-			{8,9},
-			{14-3.16667,9}
-		};
-	
-		@SuppressWarnings("unused")
-		double[][]switchLeftLeft = new double[][] {
-			{0,leftStartPos},
-			{5,leftStartPos},
-			{16,22},
-			{16,19.5}
-		};
-	
-		@SuppressWarnings("unused")
-		double[][] scaleCenterLeft = new double[][] {
-			{0,centerStartPos},
-			{5,centerStartPos},
-			{12,23},
-			{25,25}
-		};
-	
-		@SuppressWarnings("unused")
-		double[][] scaleCenterRight = new double[][]{
-			{0,centerStartPos},
-			{3,centerStartPos},
-			{7,6},
-			{18,5},
-			{24,5}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] oldScaleRightRight = new double[][] {
-			{0,rightStartPos},
-			{10,2},
-			{18,2},
-			{20,3},
-			{21.5,7-(robotLength/2)}		
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] scaleRightRight = new double[][] {
-			{0,rightStartPos},
-			{5,rightStartPos+.5},
-			{14+1,3.8+.5},
-			{20,9.3}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] switchRightRight = new double[][] {
-			{0,rightStartPos},
-			{8,rightStartPos},
-			{10.5,7},
-			{10.5,8}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] scaleRightLeft = new double[][] {
-			{0,rightStartPos},
-			{18-2.75,rightStartPos},
-			{18-1.75,29},
-			{24-robotLength,27}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] anyPosDriveStrait =  new double[][] {
-			{0,rightStartPos},
-			{8,rightStartPos}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] fromEndToFirstCube =  new double[][] {
-			{0,leftStartPos},
-			{2,leftStartPos},
-			{3.25,21.25}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] fromEndToFirstCube2 =  new double[][] {
-			{0,leftStartPos},
-			{0.5,leftStartPos},
-			{0.75,18.5},
-			{2,18}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] toNullZone =  new double[][] {
-			{0, leftStartPos},
-			{1, leftStartPos},
-			{3.2, leftStartPos - 2.2},
-			{4, leftStartPos - 1}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] backout = new double[][] {
-			{0,rightStartPos},
-			{8,rightStartPos}
-		};
-		
-		@SuppressWarnings("unused")
-		double[][] leftBackoutToCube = new double[][] {
-			{0,centerStartPos},
-			{1.5,centerStartPos},
-			{2.5,centerStartPos-1},
-			{3,centerStartPos-2},
-			{4,centerStartPos-5}
-		};
-		
-		int[] test = {10, 1, 22, 2, 22, 3, 22, 4, 8, 10, 22, 22, 22};
-		
-		print(answer(test, 10));
-		
-		final FalconPathPlanner path = new FalconPathPlanner(scaleRightLeft);
-		path.calculate(totalTime, timeStep, robotTrackWidth);
+		double[][][] waypoints = Constants.LEFT_SWITCH;
 
-		System.out.println("Time in ms: " + (System.currentTimeMillis()-start));
-		
-		FalconPathPlanner.print(path.smoothLeftVelocity, "LEFTV");
-		FalconPathPlanner.print(path.smoothRightVelocity, "RIGHTV");
-		FalconPathPlanner.print(path.heading, "HEADING");
+		double[][] output = path.calculate(waypoints[0], waypoints[1][0][0], waypoints[1][0][1], Constants.robotTrackWidth);
+
+		System.out.println("Calculation time: " + (System.currentTimeMillis()-start) + "ms\nSteps: " + output.length);
+		//path.print(test, "test"); //enable for console output
+
 
 		if(!GraphicsEnvironment.isHeadless())
 		{

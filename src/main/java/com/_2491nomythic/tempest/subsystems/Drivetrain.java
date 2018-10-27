@@ -5,7 +5,9 @@ import com._2491nomythic.tempest.commands.drivetrain.QuadraticDrive;
 import com._2491nomythic.tempest.commands.drivetrain.TwoStickDrive;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -234,22 +236,25 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 		rightMaster.setSelectedSensorPosition(0, Constants.kVelocitySlotId, Constants.kTimeoutMs);
 	}
 	
-	
 	/**
 	 * @return The value of the left drive encoder in inches
 	 */
 	public double getLeftEncoderDistance() {
-		return leftMaster.getSelectedSensorPosition(0) * Constants.driveEncoderToInches;
+		return getLeftEncoderDistanceRaw() * Constants.driveEncoderToInches;
 	}
-	
-	//TODO Write JavaDocs
-	
+
+	/**
+	 * 
+	 * @return Value of left encoder in raw ticks;
+	 */
 	public double getLeftEncoderDistanceRaw() {
 		return leftMaster.getSelectedSensorPosition(0);
 	}
 	
-	//TODO Write JavaDocs
-	
+	/**
+	 * 
+	 * @return Value of right encoder in raw ticks
+	 */
 	public double getRightEncoderDistanceRaw() {
 		return rightMaster.getSelectedSensorPosition(0);
 	}
@@ -258,7 +263,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * @return The value of the right drive encoder in inches
 	 */
 	public double getRightEncoderDistance() {
-		return rightMaster.getSelectedSensorPosition(0) * Constants.driveEncoderToInches;
+		return getRightEncoderDistanceRaw() * Constants.driveEncoderToInches;
 	}
 	
 	/**
@@ -475,6 +480,11 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	@Override
 	public boolean checkSys() {
 		return false;
+	}
+
+	@Override
+	public void outputToSmartDashboard() {
+
 	}
 }
 
