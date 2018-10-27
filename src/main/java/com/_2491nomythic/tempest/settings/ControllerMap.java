@@ -22,7 +22,6 @@ public class ControllerMap {
 	public static final int togglelightsButton2 = 8;
 	public static final int tankTurnForwardButton = 1;
 	public static final int tankTurnBackwardButton = 2;
-	public static final int climberButton = 4; //TODO renumber this later
     
 	//Operator	F310
 	/*public static final int setSwitchRPS = 1;//f310: 1, ps4: 2;
@@ -45,7 +44,6 @@ public class ControllerMap {
 	public static final int intakeAxis = 1;
 	public static final int cubeStorageAxis = 5;
 	public static final int shooterReverseButton = 180;
-	public static final int convertToClimbMode = 7; //TODO renumber this as needed
 	
 	//Probably not going to be used
 
