@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class Automatic extends _CommandBase {
-	private int mPathLength;
+	private int mPathLength, currentStep;
 	@SuppressWarnings("unused")
 	private double mWaitTime;
 	private DrivePath mPath;
@@ -132,7 +132,7 @@ public class Automatic extends _CommandBase {
 	private StartPosition mStartPosition;
 	private Priority mPriority;
 	private Crossing mCrossing;
-	public EndPosition mEndPosition;
+	private EndPosition mEndPosition;
 	
 	/**
 	 * 
@@ -173,7 +173,7 @@ public class Automatic extends _CommandBase {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {	
-	    int currentStep = mPath.getCurrentStep();
+	    currentStep = mPath.getCurrentStep();
 		switch (mEndPosition) {
 	    	case OPPOSITE_SCALE:
 	    		if(currentStep == mPathLength - 12 || currentStep == mPathLength - 13) {
@@ -343,9 +343,5 @@ public class Automatic extends _CommandBase {
     private synchronized void getGameData() {
     	mGameData = DriverStation.getInstance().getGameSpecificMessage();  
 	}
-    
-    public EndPosition getEndPosition() {
-    	return mEndPosition;
-    }
 }
 	
