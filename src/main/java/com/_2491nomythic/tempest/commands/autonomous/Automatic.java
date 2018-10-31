@@ -100,7 +100,12 @@ public class Automatic extends _CommandBase {
 		 * @param timeStep
 		 */
 		EndPosition(double[][][] waypointsData) {
-			this.calculatedPath = pathPlanner.calculate(waypointsData[0], waypointsData[1][0][0], waypointsData[1][0][1], Constants.robotTrackWidth);
+			if (waypointsData != null)
+			{
+				this.calculatedPath = pathPlanner.calculate(waypointsData[0], waypointsData[1][0][0], waypointsData[1][0][1], Constants.robotTrackWidth);
+			} else {
+				this.calculatedPath = null;
+			}
 		}
 
 		public double headingStep(int step) {
