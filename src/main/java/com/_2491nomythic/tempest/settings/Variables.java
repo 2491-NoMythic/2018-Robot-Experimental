@@ -5,8 +5,10 @@ package com._2491nomythic.tempest.settings;
  * Various information needed for robot functionality that can be modified by the code itself
  */
 public class Variables {
-	
-	//Drive
+
+    public static boolean TankTurnBack = false;
+    public static boolean TankTurnFore = false;
+    //Drive
 	public static boolean useLinearAcceleration = true;
 	public static double accelerationSpeed = 0.05;
 	public static double driveDefault = 1;

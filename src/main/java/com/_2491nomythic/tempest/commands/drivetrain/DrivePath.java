@@ -25,7 +25,7 @@ public class DrivePath extends _CommandBase {
     	
 		this.reverse = reverse;
 		headingModifier = startPosition.getHeadingModifier();
-		directionModifer = startPosition.getDirectionModifer();
+		directionModifer = startPosition.getDirectionModifier();
 		leftIndex = startPosition.getLeftIndex();
 		rightIndex = startPosition.getRightIndex();
 		path = endPosition;	

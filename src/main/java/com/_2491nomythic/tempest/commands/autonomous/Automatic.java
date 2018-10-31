@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Automatic extends _CommandBase {
 	private int mPathLength, currentStep;
-	@SuppressWarnings("unused")
 	private double mWaitTime;
 	private DrivePath mPath;
 	private DriveTime hitSwitch;
@@ -27,7 +26,7 @@ public class Automatic extends _CommandBase {
 	private boolean timerSafety;
 	private Timer mTimer;
 	
-	public static enum StartPosition {
+	public enum StartPosition {
 		LEFT(true, true), 
 		CENTER(false, false), 
 		RIGHT(false, true), 
@@ -43,23 +42,23 @@ public class Automatic extends _CommandBase {
 		LEFT_PYRAMID(false, false), 
 		RIGHT_PYRAMID(false, false);
 
-		private int mHeadingModifer;
+		private int mHeadingModifier;
 		private int mDirectionModifier;
 		private int mRightIndex;
 		private int mLeftIndex;
 
 		StartPosition(boolean left, boolean reversed) {
-			mHeadingModifer = left ? -1 : 1;
+			mHeadingModifier = left ? -1 : 1;
 			mLeftIndex = left ? 2 : 1;
 			mRightIndex = left ? 1 : 2;
 			mDirectionModifier = reversed ? -1 : 1;
 		}
 
 		public int getHeadingModifier() {
-			return mHeadingModifer;
+			return mHeadingModifier;
 		}
 
-		public int getDirectionModifer() {
+		public int getDirectionModifier() {
 			return mDirectionModifier;
 		}
 
@@ -72,42 +71,39 @@ public class Automatic extends _CommandBase {
 		}
 	}
 	
-	public static enum EndPosition {
-		CROSS_LINE(Constants.CROSS_LINE), 
-		SWITCH(Constants.SWITCH), 
-		LEFT_SWITCH(Constants.LEFT_SWITCH), 
-		RIGHT_SWITCH(Constants.RIGHT_SWITCH), 
-		OPPOSITE_SWTICH(Constants.OPPOSITE_SWTICH), 
-		SCALE(Constants.SCALE), 
-		OPPOSITE_SCALE(Constants.OPPOSITE_SCALE), 
-		BUMP_COUNTER(Constants.BUMP_COUNTER), 
-		MAX(Constants.MAX), 
-		CUBE(Constants.CUBE), 
-		NULL(Constants.NULL), 
-		BACKUP(Constants.BACKUP), 
-		LEFT_PYRAMID(Constants.LEFT_PYRAMID), 
-		RIGHT_PYRAMID(Constants.RIGHT_PYRAMID), 
-		SECOND_LEFT_SWITCH(Constants.SECOND_LEFT_SWITCH), 
+	public enum EndPosition {
+		CROSS_LINE(Constants.CROSS_LINE),
+		SWITCH(Constants.SWITCH),
+		LEFT_SWITCH(Constants.LEFT_SWITCH),
+		RIGHT_SWITCH(Constants.RIGHT_SWITCH),
+		OPPOSITE_SWTICH(Constants.OPPOSITE_SWTICH),
+		SCALE(Constants.SCALE),
+		OPPOSITE_SCALE(Constants.OPPOSITE_SCALE),
+		BUMP_COUNTER(Constants.BUMP_COUNTER),
+		MAX(Constants.MAX),
+		CUBE(Constants.CUBE),
+		NULL(Constants.NULL),
+		BACKUP(Constants.BACKUP),
+		LEFT_PYRAMID(Constants.LEFT_PYRAMID),
+		RIGHT_PYRAMID(Constants.RIGHT_PYRAMID),
+		SECOND_LEFT_SWITCH(Constants.SECOND_LEFT_SWITCH),
 		SECOND_RIGHT_SWITCH(Constants.SECOND_RIGHT_SWITCH);
 
 		private final double[][] calculatedPath;
 
 		/**
-		 * 
-		 * @param name
-		 * @param waypoints
-		 * @param totalTime
-		 * @param timeStep
+		 *
+		 * @param wayPointData
 		 */
-		EndPosition(double[][][] waypointsData) {
-			this.calculatedPath = pathPlanner.calculate(waypointsData[0], waypointsData[1][0][0], waypointsData[1][0][1], Constants.robotTrackWidth);
+		EndPosition(double[][][] wayPointData) {
+			this.calculatedPath = pathPlanner.calculate(wayPointData[0], wayPointData[1][0][0], wayPointData[1][0][1], Constants.robotTrackWidth);
 		}
 
 		public double headingStep(int step) {
 			return calculatedPath[step][0];
 		}
 		/**
-		 * 
+		 *
 		 * @param timeStep destired time step
 		 * @param index 1 for left, 2 for right. Pull this from the {@link StartPosition} getIndex method
 		 * @return Velocity for the given side and timeStep
@@ -121,12 +117,12 @@ public class Automatic extends _CommandBase {
 		}
 	}
 	
-	public static enum Priority {
-		SCALE, SWITCH;
+	public enum Priority {
+		SCALE, SWITCH
 	}
 	
-	public static enum Crossing {
-		OFF, ON, FORCE;
+	public enum Crossing {
+		OFF, ON, FORCE
 	}
 	
 	private StartPosition mStartPosition;
@@ -186,17 +182,17 @@ public class Automatic extends _CommandBase {
 		   		}
 		   		break;
 		   	case SCALE:
-		   		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {	
+		   		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {
 		   			intake.openArms();
 		   			shooter.setScalePosition();
 		   			mWaitTime = 0.1;
 		   		} else if(currentStep == mPathLength - 85 || currentStep == mPathLength - 86) {
-		   			mSetScaleSpeed.start();		    			
+		   			mSetScaleSpeed.start();
 	    			mRevShoot.start();
 	    		}
 	    		break;
 	    	case NULL:
-	    		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {	
+	    		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {
 	    			intake.openArms();
 	    			shooter.setScalePosition();
 	    			mWaitTime = 0.1;
@@ -236,7 +232,7 @@ public class Automatic extends _CommandBase {
     	}
     }
 
-    
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {    	
     	return mTimer.get() > 2;

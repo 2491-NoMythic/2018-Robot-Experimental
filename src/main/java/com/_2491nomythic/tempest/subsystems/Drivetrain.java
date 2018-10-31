@@ -140,7 +140,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * Drives the left side of the robot
 	 * @param speed The power fed to the motors, ranging from -1 to 1, where negative values run the motors backwards
 	 */
-	public void driveLeftPercentOutput(double speed){
+	private void driveLeftPercentOutput(double speed){
 		leftMaster.set(ControlMode.PercentOutput, speed * Variables.driveAdjustmentCoefficient);
 	}
 	
@@ -148,7 +148,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * Drives the right side of the robot
 	 * @param speed The power fed to the motors, ranging from -1 to 1, where negative values run the motors backwards
 	 */
-	public void driveRightPercentOutput(double speed){
+	private void driveRightPercentOutput(double speed){
 		rightMaster.set(ControlMode.PercentOutput, speed * Variables.driveAdjustmentCoefficient);
 	}
 	
@@ -174,7 +174,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * Drives the left side of the robot
 	 * @param speed The speed of the wheels in inches per second
 	 */
-	public void driveLeftVelocity(double speed){
+	private void driveLeftVelocity(double speed){
 		leftMaster.set(ControlMode.Velocity, speed);
 	}
 
@@ -183,7 +183,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * Drives the right side of the robot
 	 * @param speed The speed of the wheels in inches per second
 	 */
-	public void driveRightVelocity(double speed){
+	private void driveRightVelocity(double speed){
 		rightMaster.set(ControlMode.Velocity, speed);
 	}
 	
@@ -475,6 +475,16 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	public void setCameraMode() {
 		limeLight.getEntry("ledMode").setNumber(1);
 		limeLight.getEntry("camMode").setNumber(1);
+	}
+
+	public double linearlyAccelerate(double currentSpeed, double lastSpeed, double accelerateMax) {
+		double leftAcceleration = (currentSpeed - lastSpeed);
+		double signOfLeftAcceleration = leftAcceleration / Math.abs(leftAcceleration);
+
+		if (Math.abs(leftAcceleration) > accelerateMax && Math.abs(currentSpeed) - Math.abs(lastSpeed) > 0) {
+            return lastSpeed + (accelerateMax * signOfLeftAcceleration);
+		}
+        return currentSpeed;
 	}
 
 	@Override

@@ -11,8 +11,6 @@ package com._2491nomythic.tempest;
 import com._2491nomythic.tempest.commands.KillSwitch;
 import com._2491nomythic.tempest.commands.cubestorage.UltrasonicCubeHaltManual;
 import com._2491nomythic.tempest.commands.drivetrain.AdjustmentMode;
-import com._2491nomythic.tempest.commands.drivetrain.TankTurnBackward;
-import com._2491nomythic.tempest.commands.drivetrain.TankTurnForward;
 import com._2491nomythic.tempest.commands.intake.RunIntakeManual;
 import com._2491nomythic.tempest.commands.intake.ToggleIntakeDeployment;
 import com._2491nomythic.tempest.commands.intake.ToggleFingerWhileHeld;
@@ -37,17 +35,17 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	private final Joystick[] controllers = new Joystick[2]; //[4];
-	Button killSwitch1, killSwitch2, driverScaleShoot, driverSwitchShoot, driverFeedCube, driverAutoShoot, deployIntake, reverseShooter;
-	Button openIntakeFingers, raiseShooter, setLowScaleSpeed, setMediumScaleSpeed, setHighScaleSpeed, setSwitchSpeed;
+	private Button killSwitch1, killSwitch2, driverScaleShoot, driverSwitchShoot, driverFeedCube, driverAutoShoot, deployIntake, reverseShooter;
+	private Button openIntakeFingers, raiseShooter, setLowScaleSpeed, setMediumScaleSpeed, setHighScaleSpeed, setSwitchSpeed;
 	public Button cubeStorageControl1, cubeStorageControl2, runShooter;
-	Button automaticIntake, intakeControl1, intakeControl2, tankTurnForward, tankTurnBackward;
-	Button operatorKillSwitch, output, input, configure, spinUp, fingers, adjustmentDrive, adjustmentDrive2, toggleLights1, toggleLights2;
+	private Button automaticIntake, intakeControl1, intakeControl2, tankTurnForward, tankTurnBackward;
+	private Button operatorKillSwitch, output, input, configure, spinUp, fingers, adjustmentDrive, adjustmentDrive2, toggleLights1, toggleLights2;
 
 	public enum ControllerType {
 		F310,
 		PS4,
 		Xbox,
-		ButtonBoard;
+		ButtonBoard
 	}
 	
 	public void init() {
@@ -62,16 +60,16 @@ public class OI {
 		killSwitch2.whenPressed(new KillSwitch());
 		
 		tankTurnForward = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.tankTurnForwardButton);
-		tankTurnForward.whileHeld(new TankTurnForward());
+		tankTurnForward.whileHeld(new AdjustmentMode(false, true, true));
 		
 		tankTurnBackward = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.tankTurnBackwardButton);
-		tankTurnBackward.whileHeld(new TankTurnBackward());
+		tankTurnBackward.whileHeld(new AdjustmentMode(false,true, false));
 		
 		adjustmentDrive = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.adjustmentButton1);
-		adjustmentDrive.whileHeld(new AdjustmentMode());
+		adjustmentDrive.whileHeld(new AdjustmentMode(true, false, false));
 		
 		adjustmentDrive2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.adjustmentButton2);
-		adjustmentDrive2.whileHeld(new AdjustmentMode());
+		adjustmentDrive2.whileHeld(new AdjustmentMode(true,false, false));
 		
 		toggleLights1 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.toggleLightsButton1);
 		toggleLights1.whenPressed(new ToggleLights());
@@ -147,7 +145,7 @@ public class OI {
 	 * 
 	 * @param joystickID
 	 *			The id of the controller. 0 = left or driver, 1 = right or codriver.
-	 * @param axisID
+	 * @param buttonID
 	 *			The id of the button (for use in getRawButton)
 	 * @return the result from running getRawButton(button)
 	 */
