@@ -176,7 +176,7 @@ public class OI {
 	 * @return the deadzoned result from running getRawAxis
 	 */
 	public double getAxisDeadzoned(int joystickID, int axisID, double deadzone) {
-		double result = -getAxis(joystickID, axisID);
+		double result = getAxis(joystickID, axisID);
 		return Math.abs(result) > deadzone ? result : 0;
 	}
 	
@@ -190,7 +190,8 @@ public class OI {
 	 * @return the squared, deadzoned result from running getRawAxis
 	 */
 	public double getAxisDeadzonedSquared(int joystickID, int axisID, double deadzone) {
-		double result = Math.abs(getAxis(joystickID, axisID));
+		double result = getAxis(joystickID, axisID);
+		result = result * Math.abs(result);
 		return Math.abs(result) > deadzone ? result : 0;
 	}
 	

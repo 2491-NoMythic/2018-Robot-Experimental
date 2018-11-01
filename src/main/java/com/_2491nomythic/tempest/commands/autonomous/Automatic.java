@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Automatic extends _CommandBase {
 	private int mPathLength, currentStep;
+	@SuppressWarnings("unused")
 	private double mWaitTime;
 	private DrivePath mPath;
 	private DriveTime hitSwitch;
@@ -96,7 +97,12 @@ public class Automatic extends _CommandBase {
 		 * @param wayPointData
 		 */
 		EndPosition(double[][][] wayPointData) {
-			this.calculatedPath = pathPlanner.calculate(wayPointData[0], wayPointData[1][0][0], wayPointData[1][0][1], Constants.robotTrackWidth);
+			if (waypointsData != null)
+			{
+				this.calculatedPath = pathPlanner.calculate(wayPointData[0], wayPointData[1][0][0], wayPointData[1][0][1], Constants.robotTrackWidth);
+			} else {
+				this.calculatedPath = null;
+			}
 		}
 
 		public double headingStep(int step) {
@@ -232,7 +238,7 @@ public class Automatic extends _CommandBase {
     	}
     }
 
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {    	
     	return mTimer.get() > 2;

@@ -8,7 +8,7 @@ import com._2491nomythic.tempest.settings.Variables;
  * Drives the robot with linear acceleration as according to input from a driver's controller
  */
 public class Drive extends _CommandBase {
-	private double turnSpeed, currentLeftSpeed, currentRightSpeed, lastLeftSpeed, lastRightSpeed;	
+	private double turnSpeed, currentLeftSpeed, currentRightSpeed, lastLeftSpeed, lastRightSpeed, mainAxis;
 	
 	/**
 	 * Drives the robot with linear acceleration as according to input from a driver's controller
@@ -28,11 +28,13 @@ public class Drive extends _CommandBase {
 		turnSpeed = 0.5 * oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.05);
 		turnSpeed = 0.8 * oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.05);
 
+		mainAxis= -oi.getAxisDeadzoned(ControllerMap.driveController, ControllerMap.driveMainAxis, 0.1);
+
 		lastLeftSpeed = currentLeftSpeed;
 		lastRightSpeed = currentRightSpeed;
 		
-		currentLeftSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, 0.1) + turnSpeed;
-		currentRightSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, 0.1) - turnSpeed;
+		currentLeftSpeed = mainAxis + turnSpeed;
+		currentRightSpeed = mainAxis - turnSpeed;
 		
 		if (Variables.useLinearAcceleration) {
 			currentLeftSpeed = drivetrain.linearlyAccelerate(currentLeftSpeed, lastLeftSpeed, Variables.accelerationSpeed);

@@ -17,13 +17,10 @@ import com._2491nomythic.tempest.commands.autonomous.Automatic.EndPosition;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.Priority;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.StartPosition;
 import com._2491nomythic.tempest.commands.drivetrain.DrivePath;
-import com._2491nomythic.tempest.commands.drivetrain.DriveStraightToPositionPID;
 import com._2491nomythic.tempest.commands.drivetrain.DriveTime;
-import com._2491nomythic.tempest.commands.drivetrain.RotateDrivetrainWithGyroPID;
 import com._2491nomythic.tempest.commands.lights.SendAllianceColor;
 import com._2491nomythic.tempest.commands.lights.SerialConnectivityTest;
 import com._2491nomythic.tempest.commands.lights.UpdateLightsPattern;
-import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
 import com._2491nomythic.tempest.subsystems.Drivetrain;
 import com._2491nomythic.tempest.subsystems.Shooter;
@@ -100,26 +97,17 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Crossing", m_CrossingSelector);
 		SmartDashboard.putData("Controller Type", m_ControllerType);
 		
-		SmartDashboard.putData("DriveStraightToPositionPID", new DriveStraightToPositionPID(5));
-		SmartDashboard.putData("RotateDrivetrainRelative180", new RotateDrivetrainWithGyroPID(180, false));
-		SmartDashboard.putData("RotateDrivetrainRelative-180", new RotateDrivetrainWithGyroPID(-180, false));
-		SmartDashboard.putData("RotateDrivetrainRelative90", new RotateDrivetrainWithGyroPID(90, false));
-		SmartDashboard.putData("RotateDrivetrainRelative-90", new RotateDrivetrainWithGyroPID(-90, false));
 		SmartDashboard.putData("HitSwitch", new DriveTime(-0.3, 0.4, 0.8));
 
-		SmartDashboard.putNumber("ProportionalRotate", Variables.proportionalRotate);
-		SmartDashboard.putNumber("DerivativeRotate", Variables.derivativeRotate);
-		SmartDashboard.putNumber("ProportionalForward", Variables.proportionalForward);
-		SmartDashboard.putNumber("DerivativeForward", Variables.derivativeForward);
-		SmartDashboard.putNumber("DriveDefault", Variables.driveDefault);
 		SmartDashboard.putNumber("AutoDelay", Variables.autoDelay);
-		SmartDashboard.putNumber("SwitchRPS", Constants.shooterSwitchRPS);
-		SmartDashboard.putNumber("LowScaleRPS", Constants.shooterLowScaleRPS);
-		SmartDashboard.putNumber("MedScaleRPS", Constants.shooterMediumScaleRPS);
-		SmartDashboard.putNumber("HighScaleRPS", Constants.shooterHighScaleRPS);
-		SmartDashboard.putNumber("GyroPitchMeasure", 0);
 		SmartDashboard.putData("Backup", new DrivePath(StartPosition.LEFT_SWITCH, EndPosition.BACKUP, false));
 		System.out.println("Boot Successful");
+	}
+
+	@Override
+	public void robotPeriodic() {
+		Scheduler.getInstance().run();
+		outputToSmartDashboard();
 	}
 
 	/**
@@ -137,8 +125,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-		outputToSmartDashboard();
 	}
 
 	/**
@@ -176,8 +162,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-		outputToSmartDashboard();
 	}
 
 	@Override
@@ -190,7 +174,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		
-		m_ControllerType.getSelected();
+		//m_ControllerType.getSelected();
 		
 		sendColor.start();
 		isTeleop = true;
@@ -202,8 +186,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
-		outputToSmartDashboard();
 	}
 
 	/**
@@ -220,17 +202,5 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightShootRPS", Shooter.getInstance().getRightShootVelocity());
 		SmartDashboard.putNumber("Pathing Gyro", -Drivetrain.getInstance().getRawGyroAngle());
 		SmartDashboard.putNumber("GyroPitchMeasure", Drivetrain.getInstance().getPitchAngle());
-
-		Variables.derivativeRotate = SmartDashboard.getNumber("DerivateRotate", Variables.derivativeRotate);
-		Variables.proportionalRotate = SmartDashboard.getNumber("ProportionalRotate", Variables.proportionalRotate);
-		Variables.proportionalForward = SmartDashboard.getNumber("ProportionalForward", Variables.proportionalForward);
-		Variables.derivativeForward = SmartDashboard.getNumber("DerivativeForward", Variables.derivativeForward);
-		Variables.driveDefault = SmartDashboard.getNumber("DriveDefault", 1);
-		Constants.shooterHighScaleRPS = SmartDashboard.getNumber("HighScaleRPS", Constants.shooterHighScaleRPS);
-		Constants.shooterMediumScaleRPS = SmartDashboard.getNumber("MedScaleRPS", Constants.shooterMediumScaleRPS);
-		Constants.shooterLowScaleRPS = SmartDashboard.getNumber("LowScaleRPS", Constants.shooterLowScaleRPS);
-		Constants.shooterSwitchRPS = SmartDashboard.getNumber("SwitchRPS", Constants.shooterSwitchRPS);
-            
-		Drivetrain.getInstance().chooseDefaultCommand(Variables.driveDefault);
 	}
 }
