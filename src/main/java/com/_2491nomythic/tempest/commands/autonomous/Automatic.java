@@ -94,10 +94,10 @@ public class Automatic extends _CommandBase {
 
 		/**
 		 *
-		 * @param wayPointData
+		 * @param wayPointData an array of waypoints, timeSteps, and totalLengths
 		 */
 		EndPosition(double[][][] wayPointData) {
-			if (waypointsData != null)
+			if (wayPointData != null)
 			{
 				this.calculatedPath = pathPlanner.calculate(wayPointData[0], wayPointData[1][0][0], wayPointData[1][0][1], Constants.robotTrackWidth);
 			} else {
