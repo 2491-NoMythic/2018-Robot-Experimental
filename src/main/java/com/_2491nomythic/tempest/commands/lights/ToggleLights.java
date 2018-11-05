@@ -16,12 +16,7 @@ public class ToggleLights extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Variables.useLights) {
-    		Variables.useLights = false;
-    	}
-    	else {
-    		Variables.useLights = true;
-    	}
+        Variables.useLights = !Variables.useLights;
     }
 
     // Called repeatedly when this Command is scheduled to run

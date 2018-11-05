@@ -8,7 +8,8 @@ import com._2491nomythic.tempest.settings.Variables;
  *Lets the driver control the drivetrain using two controllers
  */
 public class TwoStickDrive extends _CommandBase {
-	private double lastLeftSpeed, currentLeftSpeed, lastRightSpeed, currentRightSpeed;
+    private double currentLeftSpeed;
+    private double currentRightSpeed;
 	
 	/**
 	 * Lets the driver control the drivetrain using two controllers
@@ -26,9 +27,9 @@ public class TwoStickDrive extends _CommandBase {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {		
-		lastLeftSpeed = currentLeftSpeed;
-		lastRightSpeed = currentRightSpeed;
+	protected void execute() {
+        double lastLeftSpeed = currentLeftSpeed;
+        double lastRightSpeed = currentRightSpeed;
 		
 		currentLeftSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, 0.05);
 		currentRightSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveSecondaryController, ControllerMap.driveMainAxis, 0.05);

@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.Timer;
 public class UpdateLightsPattern extends _CommandBase {
 	private Timer sonicTimer, readyToFireTimer;
 	private boolean newCube, readyEnough;
-	private int data;
 
     public UpdateLightsPattern() {
         // Use requires() here to declare subsystem dependencies
@@ -52,8 +51,9 @@ public class UpdateLightsPattern extends _CommandBase {
     			readyEnough = false;
     		}
     	}
-    	
-    	if(Variables.readyToFire || readyEnough) {
+
+        int data;
+        if(Variables.readyToFire || readyEnough) {
     		readyEnough = true;
     		data = 9;
     	}

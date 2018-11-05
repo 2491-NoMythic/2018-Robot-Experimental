@@ -35,11 +35,18 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	private final Joystick[] controllers = new Joystick[2]; //[4];
-	private Button killSwitch1, killSwitch2, driverScaleShoot, driverSwitchShoot, driverFeedCube, driverAutoShoot, deployIntake, reverseShooter;
-	private Button openIntakeFingers, raiseShooter, setLowScaleSpeed, setMediumScaleSpeed, setHighScaleSpeed, setSwitchSpeed;
+	private Button driverScaleShoot;
+	private Button driverSwitchShoot;
+	private Button driverFeedCube;
+	private Button driverAutoShoot;
 	public Button cubeStorageControl1, cubeStorageControl2, runShooter;
-	private Button automaticIntake, intakeControl1, intakeControl2, tankTurnForward, tankTurnBackward;
-	private Button operatorKillSwitch, output, input, configure, spinUp, fingers, adjustmentDrive, adjustmentDrive2, toggleLights1, toggleLights2;
+	private Button automaticIntake;
+	private Button operatorKillSwitch;
+	private Button output;
+	private Button input;
+	private Button configure;
+	private Button spinUp;
+	private Button fingers;
 
 	public enum ControllerType {
 		F310,
@@ -53,28 +60,28 @@ public class OI {
 		controllers[1] = new PS4Controller(ControllerMap.operatorController);
 		
 		//Main Drive Controller
-		killSwitch1 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.killSwitchButton1);
+		Button killSwitch1 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.killSwitchButton1);
 		killSwitch1.whenPressed(new KillSwitch());
-		
-		killSwitch2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.killSwitchButton2);
+
+		Button killSwitch2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.killSwitchButton2);
 		killSwitch2.whenPressed(new KillSwitch());
-		
-		tankTurnForward = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.tankTurnForwardButton);
+
+		Button tankTurnForward = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.tankTurnForwardButton);
 		tankTurnForward.whileHeld(new AdjustmentMode(false, true, true));
-		
-		tankTurnBackward = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.tankTurnBackwardButton);
+
+		Button tankTurnBackward = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.tankTurnBackwardButton);
 		tankTurnBackward.whileHeld(new AdjustmentMode(false,true, false));
-		
-		adjustmentDrive = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.adjustmentButton1);
+
+		Button adjustmentDrive = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.adjustmentButton1);
 		adjustmentDrive.whileHeld(new AdjustmentMode(true, false, false));
-		
-		adjustmentDrive2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.adjustmentButton2);
+
+		Button adjustmentDrive2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.adjustmentButton2);
 		adjustmentDrive2.whileHeld(new AdjustmentMode(true,false, false));
-		
-		toggleLights1 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.toggleLightsButton1);
+
+		Button toggleLights1 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.toggleLightsButton1);
 		toggleLights1.whenPressed(new ToggleLights());
-		
-		toggleLights2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.togglelightsButton2);
+
+		Button toggleLights2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.togglelightsButton2);
 		toggleLights2.whenPressed(new ToggleLights());
 		
 		//Button Board
@@ -97,39 +104,40 @@ public class OI {
 		output = new JoystickButton(controllers[ControllerMap.buttonBoard], ControllerMap.bigRedButton);
 		output.whileHeld(new Output());
 		*/
+
 		//Operator Controller
-		deployIntake = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.deployIntake);
+		Button deployIntake = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.deployIntake);
 		deployIntake.whenPressed(new ToggleIntakeDeployment());
-		
-		openIntakeFingers = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.openIntakeFingers, 0.1);
+
+		Button openIntakeFingers = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.openIntakeFingers, 0.1);
 		openIntakeFingers.whileHeld(new ToggleFingerWhileHeld());
-		
-		intakeControl1 = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.intakeAxis, 0.1);
+
+		Button intakeControl1 = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.intakeAxis, 0.1);
 		intakeControl1.whileHeld(new RunIntakeManual());
-		
-		intakeControl2 = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.intakeAxis, -0.1);
+
+		Button intakeControl2 = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.intakeAxis, -0.1);
 		intakeControl2.whileHeld(new RunIntakeManual());
 		
 		//Shooter
-		raiseShooter = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.raiseShooter);
+		Button raiseShooter = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.raiseShooter);
 		raiseShooter.whenPressed(new ToggleShooterPosition());
-		
-		setLowScaleSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setLowScaleRPS);
+
+		Button setLowScaleSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setLowScaleRPS);
 		setLowScaleSpeed.whenPressed(new SetShooterSpeed(Constants.shooterLowScaleSpeed));
-		
-		setMediumScaleSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setMediumScaleRPS);
+
+		Button setMediumScaleSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setMediumScaleRPS);
 		setMediumScaleSpeed.whenPressed(new SetShooterSpeed(Constants.shooterMediumScaleSpeed));
-		
-		setHighScaleSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setHighScaleRPS);
+
+		Button setHighScaleSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setHighScaleRPS);
 		setHighScaleSpeed.whenPressed(new SetShooterSpeed(Constants.shooterHighScaleSpeed));
-		
-		setSwitchSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setSwitchRPS);
+
+		Button setSwitchSpeed = new JoystickButton(controllers[ControllerMap.operatorController], ControllerMap.setSwitchRPS);
 		setSwitchSpeed.whenPressed(new SetShooterSpeed(Constants.shooterSwitchSpeed));
 
 		runShooter = new JoystickAxisButton(controllers[ControllerMap.operatorController], ControllerMap.shooterButton, 0.1);
 		runShooter.whileHeld(new RunShooterCustom());
-		
-		reverseShooter = new JoystickPOVButton(controllers[ControllerMap.operatorController], ControllerMap.shooterReverseButton);
+
+		Button reverseShooter = new JoystickPOVButton(controllers[ControllerMap.operatorController], ControllerMap.shooterReverseButton);
 		reverseShooter.whileHeld(new ReverseShooter());
 		
 		//CubeStorage

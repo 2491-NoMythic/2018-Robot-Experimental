@@ -11,7 +11,9 @@ import com._2491nomythic.tempest.settings.Variables;
 public class DrivePath extends _CommandBase {
 	private int mCurrentStep, directionModifer, headingModifier, mLength, leftIndex, rightIndex;
 	private EndPosition path;
-	private double mInitialHeading, mHeadingDiffrence, mTurnAdjustment, mAdjustedLeftVelocity, mAdjustedRightVelocity;
+	private double mInitialHeading;
+    private double mAdjustedLeftVelocity;
+    private double mAdjustedRightVelocity;
 	private boolean reverse;
 	/**
 	 * 
@@ -67,8 +69,8 @@ public class DrivePath extends _CommandBase {
      * The heading difference in-between the path and the gyroscope is used to increase or decrease the speed of each drive rail proportionally
      */
     private synchronized void adjustVelocities() {
-    	mHeadingDiffrence = headingModifier * path.headingStep(mCurrentStep) + drivetrain.getRawGyroAngle() - mInitialHeading;
-		mTurnAdjustment = Constants.kVelocitykG * Constants.kVeloctiyUnitConversion * mHeadingDiffrence; 
+        double mHeadingDifference = headingModifier * path.headingStep(mCurrentStep) + drivetrain.getRawGyroAngle() - mInitialHeading;
+        double mTurnAdjustment = Constants.kVelocitykG * Constants.kVeloctiyUnitConversion * mHeadingDifference;
 		
 		mAdjustedLeftVelocity = directionModifer * path.velocityStep(mCurrentStep, leftIndex) - mTurnAdjustment;
 		mAdjustedRightVelocity = directionModifer * path.velocityStep(mCurrentStep, rightIndex) + mTurnAdjustment;

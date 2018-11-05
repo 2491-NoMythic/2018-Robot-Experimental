@@ -8,8 +8,7 @@ import com._2491nomythic.tempest.settings.ControllerMap;
  *Allows the cube storage to be run manually by the codriver.
  */
 public class TransportCubeManual extends _CommandBase {
-	private double currentSpeed;
-	/**
+    /**
 	 *Allows the cube storage to be run manually by the codriver.
 	 */
 	public TransportCubeManual() {
@@ -24,7 +23,7 @@ public class TransportCubeManual extends _CommandBase {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		currentSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.operatorController, ControllerMap.cubeStorageAxis, 0.05);
+        double currentSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.operatorController, ControllerMap.cubeStorageAxis, 0.05);
 		cubeStorage.run(currentSpeed);
 	}
 

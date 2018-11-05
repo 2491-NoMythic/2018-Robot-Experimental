@@ -25,7 +25,6 @@ public class TextFileSerializer implements IPathSerializer {
    * Each segment is in the format:
    *   pos vel acc jerk heading dt x y
    * 
-   * @param path The path to serialize.
    * @return A string representation.
    */
 	

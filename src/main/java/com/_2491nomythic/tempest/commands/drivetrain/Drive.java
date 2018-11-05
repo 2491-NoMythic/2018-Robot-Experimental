@@ -8,9 +8,10 @@ import com._2491nomythic.tempest.settings.Variables;
  * Drives the robot with linear acceleration as according to input from a driver's controller
  */
 public class Drive extends _CommandBase {
-	private double turnSpeed, currentLeftSpeed, currentRightSpeed, lastLeftSpeed, lastRightSpeed, mainAxis;
-	
-	/**
+    private double currentLeftSpeed;
+    private double currentRightSpeed;
+
+    /**
 	 * Drives the robot with linear acceleration as according to input from a driver's controller
 	 */
 	public Drive() {
@@ -25,13 +26,18 @@ public class Drive extends _CommandBase {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		turnSpeed = 0.5 * oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.05);
-		turnSpeed = 0.8 * oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.05);
+	    double turnSpeed = oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.05);
 
-		mainAxis= -oi.getAxisDeadzoned(ControllerMap.driveController, ControllerMap.driveMainAxis, 0.1);
+	    if (Variables.TankTurnBack || Variables.TankTurnFore) {
+            turnSpeed = 0.5 * turnSpeed;
+        } else {
+            turnSpeed = 0.8 * turnSpeed;
+        }
 
-		lastLeftSpeed = currentLeftSpeed;
-		lastRightSpeed = currentRightSpeed;
+        double mainAxis = -oi.getAxisDeadzoned(ControllerMap.driveController, ControllerMap.driveMainAxis, 0.1);
+
+        double lastLeftSpeed = currentLeftSpeed;
+        double lastRightSpeed = currentRightSpeed;
 		
 		currentLeftSpeed = mainAxis + turnSpeed;
 		currentRightSpeed = mainAxis - turnSpeed;

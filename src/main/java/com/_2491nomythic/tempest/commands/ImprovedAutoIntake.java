@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj.Timer;
 public class ImprovedAutoIntake extends _CommandBase {
 	private Timer timer, accelerateTimer, waitTimer, timeout;
 	private double initialWait;
-	private DriveTime backAway, goBack, creep;
+	private DriveTime backAway;
+	private DriveTime goBack;
 	private boolean completed, intaking, startOpened;
 	private int state, cycleTimeout, timeoutSafety;
 
 	/**
 	 * Automatic intake command for use with multicube autos. Moves the fingers while intaking.
 	 * @param initialWait The time to wait in seconds before moving the fingers.
-	 * @param frequency How often in seconds the fingers should open.
-	 */
+     */
     public ImprovedAutoIntake(double initialWait, boolean startOpened) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -31,7 +31,7 @@ public class ImprovedAutoIntake extends _CommandBase {
     	this.initialWait = initialWait;
     	backAway = new DriveTime(-0.4, -0.4, 0.5);
     	goBack = new DriveTime(0.4, 0.4, 0.7);
-    	creep = new DriveTime(0.15, 0.15, 200);
+		DriveTime creep = new DriveTime(0.15, 0.15, 200);
     	timer = new Timer();
     	accelerateTimer = new Timer();
     	timeout = new Timer();

@@ -15,17 +15,20 @@ import edu.wpi.first.wpilibj.Timer;
  *
  */
 public class Automatic extends _CommandBase {
-	private int mPathLength, currentStep;
-	@SuppressWarnings("unused")
+	private int mPathLength;
+    @SuppressWarnings("unused")
 	private double mWaitTime;
 	private DrivePath mPath;
-	private DriveTime hitSwitch;
-	private SetShooterSpeed mSetSwitchSpeed, mSetScaleSpeed;
-	private TransportCubeTime mFireCubeScale, mFireCubeSwitch;
-	private RunShooterCustom mRevShoot, mRevShoot2;
+	private final DriveTime hitSwitch;
+	private final SetShooterSpeed mSetSwitchSpeed;
+    private final SetShooterSpeed mSetScaleSpeed;
+	private final TransportCubeTime mFireCubeScale;
+    private final TransportCubeTime mFireCubeSwitch;
+	private final RunShooterCustom mRevShoot;
+    private final RunShooterCustom mRevShoot2;
 	private String mGameData;
 	private boolean timerSafety;
-	private Timer mTimer;
+	private final Timer mTimer;
 	
 	public enum StartPosition {
 		LEFT(true, true), 
@@ -43,10 +46,10 @@ public class Automatic extends _CommandBase {
 		LEFT_PYRAMID(false, false), 
 		RIGHT_PYRAMID(false, false);
 
-		private int mHeadingModifier;
-		private int mDirectionModifier;
-		private int mRightIndex;
-		private int mLeftIndex;
+		private final int mHeadingModifier;
+		private final int mDirectionModifier;
+		private final int mRightIndex;
+		private final int mLeftIndex;
 
 		StartPosition(boolean left, boolean reversed) {
 			mHeadingModifier = left ? -1 : 1;
@@ -131,9 +134,9 @@ public class Automatic extends _CommandBase {
 		OFF, ON, FORCE
 	}
 	
-	private StartPosition mStartPosition;
-	private Priority mPriority;
-	private Crossing mCrossing;
+	private final StartPosition mStartPosition;
+	private final Priority mPriority;
+	private final Crossing mCrossing;
 	private EndPosition mEndPosition;
 	
 	/**
@@ -162,7 +165,7 @@ public class Automatic extends _CommandBase {
     protected void initialize() {
     	timerSafety = false;
     	
-    	selectEndPosition(mStartPosition);
+    	selectEndPosition();
 		mPath = new DrivePath(mStartPosition, mEndPosition, false);
 		mPathLength = mEndPosition.pathLength();
 
@@ -174,8 +177,8 @@ public class Automatic extends _CommandBase {
 
     
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {	
-	    currentStep = mPath.getCurrentStep();
+    protected void execute() {
+        int currentStep = mPath.getCurrentStep();
 		switch (mEndPosition) {
 	    	case OPPOSITE_SCALE:
 	    		if(currentStep == mPathLength - 12 || currentStep == mPathLength - 13) {
@@ -188,15 +191,6 @@ public class Automatic extends _CommandBase {
 		   		}
 		   		break;
 		   	case SCALE:
-		   		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {
-		   			intake.openArms();
-		   			shooter.setScalePosition();
-		   			mWaitTime = 0.1;
-		   		} else if(currentStep == mPathLength - 85 || currentStep == mPathLength - 86) {
-		   			mSetScaleSpeed.start();
-	    			mRevShoot.start();
-	    		}
-	    		break;
 	    	case NULL:
 	    		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {
 	    			intake.openArms();
@@ -206,6 +200,7 @@ public class Automatic extends _CommandBase {
 	    			mSetScaleSpeed.start();
 	    			mRevShoot.start();
 	    		}
+	    		break;
 	    	default:
 	    		break;
 	   	}
@@ -262,16 +257,16 @@ public class Automatic extends _CommandBase {
     	end();
     }
     
-    private synchronized void selectEndPosition(StartPosition startPosition) {
+    private synchronized void selectEndPosition() {
     	getGameData();
     	switch(mStartPosition) {
     	case LEFT:
     		reverseGameData();
-    		respondToARCADE(mGameData);
+    		respondToARCADE();
     		break;	
     	case CENTER:
     	case RIGHT:
-    		respondToARCADE(mGameData);
+    		respondToARCADE();
     		break;
     	case CROSS_LINE:
     		mEndPosition = EndPosition.CROSS_LINE;
@@ -282,7 +277,7 @@ public class Automatic extends _CommandBase {
     	System.out.println("Selected Start Position; " + mStartPosition);
     }
     
-    private synchronized void respondToARCADE(String gameData) {
+    private synchronized void respondToARCADE() {
     	switch(mGameData.substring(0, 2)) {
     	case "LL":
 			if (mStartPosition == StartPosition.CENTER) {

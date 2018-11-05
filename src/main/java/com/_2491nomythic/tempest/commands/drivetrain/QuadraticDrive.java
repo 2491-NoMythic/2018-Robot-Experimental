@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj.Timer;
  * Controls the robot with quadratic acceleration as according to driver control input
  */
 public class QuadraticDrive extends _CommandBase {
-	private double turnSpeed, leftSpeed, rightSpeed, rawLeftSpeed, rawRightSpeed, accelerationInterval, time, timeAddition, accelerationIncrease, quadraticCoefficient;
+    private double accelerationInterval;
+    private double timeAddition;
+    private double accelerationIncrease;
+    private double quadraticCoefficient;
 	int state, necessaryIterations;
 	private Timer timer;
 
@@ -39,19 +42,19 @@ public class QuadraticDrive extends _CommandBase {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		
-		turnSpeed =  0.75 * oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.1);
-		rawLeftSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, .1);
-		rawRightSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, .1);
+
+        double turnSpeed = 0.75 * oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveTurnAxis, 0.1);
+        double rawLeftSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, .1);
+        double rawRightSpeed = -oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, .1);
 		
 		if (Math.abs(oi.getAxisDeadzonedSquared(ControllerMap.driveController, ControllerMap.driveMainAxis, .1)) <= .1) {
 			timer.reset();
 		}
-		
-		time = timer.get() + timeAddition;
+
+        double time = timer.get() + timeAddition;
 		timeAddition = 0;
-		leftSpeed = quadraticCoefficient * Math.pow(state * accelerationIncrease, 2) * rawLeftSpeed;
-		rightSpeed = quadraticCoefficient * Math.pow(state * accelerationIncrease, 2) * rawRightSpeed;
+        double leftSpeed = quadraticCoefficient * Math.pow(state * accelerationIncrease, 2) * rawLeftSpeed;
+        double rightSpeed = quadraticCoefficient * Math.pow(state * accelerationIncrease, 2) * rawRightSpeed;
 		if (state == 1) {
 			if (time < accelerationInterval) {
 				state++;

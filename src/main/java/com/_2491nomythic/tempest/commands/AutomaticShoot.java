@@ -19,7 +19,6 @@ public class AutomaticShoot extends _CommandBase {
 	private ToggleShooterPosition shiftPosition;
 	private boolean scale;
 	private int state;
-	private SetShooterSpeed setSpeed;
 
     public AutomaticShoot(boolean scale) {
         // Use requires() here to declare subsystem dependencies
@@ -35,8 +34,9 @@ public class AutomaticShoot extends _CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
     	state = 0;
-    	
-    	if(scale) {
+
+        SetShooterSpeed setSpeed;
+        if(scale) {
     		setSpeed = new SetShooterSpeed(Constants.shooterMediumScaleSpeed);
     	}
     	else {

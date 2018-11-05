@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 	private static Intake instance;
 	private TalonSRX left, right;
-	private DoubleSolenoid deplymentSolenoid, fingerSolenoid; 
+	private DoubleSolenoid deploymentSolenoid, fingerSolenoid;
 	
 	public static Intake getInstance() {
 		if (instance == null) {
@@ -31,7 +31,7 @@ public class Intake extends Subsystem {
 		left.setInverted(true);
 		
 		right = new TalonSRX(Constants.intakeTalonRightChannel);
-		deplymentSolenoid = new DoubleSolenoid(Constants.intakeSolenoidActivateChannelForward, Constants.intakeSolenoidActivateChannelReverse);
+		deploymentSolenoid = new DoubleSolenoid(Constants.intakeSolenoidActivateChannelForward, Constants.intakeSolenoidActivateChannelReverse);
 		fingerSolenoid = new DoubleSolenoid(Constants.intakeSolenoidOpenChannelForward, Constants.intakeSolenoidOpenChannelReverse);
 	}
 	
@@ -68,14 +68,14 @@ public class Intake extends Subsystem {
 	 * Sets the intake out of the frame perimeter.
 	 */
 	public void openArms() {
-		deplymentSolenoid.set(Value.kForward);
+		deploymentSolenoid.set(Value.kForward);
 	}
 	
 	/**
 	 * Sets the intake in the frame perimeter.
 	 */
 	public void retractArms() {
-		deplymentSolenoid.set(Value.kReverse);
+		deploymentSolenoid.set(Value.kReverse);
 		retractFingers();
 	}
 	
@@ -98,7 +98,7 @@ public class Intake extends Subsystem {
 	 * @return Whether or not the intake arms are extended.
 	 */
 	public boolean armsRetracted() {
-		return deplymentSolenoid.get() == Value.kReverse || deplymentSolenoid.get() == Value.kOff;
+		return deploymentSolenoid.get() == Value.kReverse || deploymentSolenoid.get() == Value.kOff;
 	}
 	
 	/**
@@ -115,16 +115,8 @@ public class Intake extends Subsystem {
 	public void stop() {
 		run(0);
 	}
-	
-	
-	
 
 	public void initDefaultCommand() {
-	}
-
-	@Override
-	public void periodic() {
-		super.periodic();
 	}
 }
 

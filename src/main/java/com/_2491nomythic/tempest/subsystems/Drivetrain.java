@@ -478,4 +478,9 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	public void outputToSmartDashboard() {
 
 	}
+
+	@Override
+    public void periodic() {
+
+    }
 }
