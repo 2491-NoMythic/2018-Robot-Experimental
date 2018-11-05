@@ -1,13 +1,9 @@
 package com._2491nomythic.tempest.subsystems;
 
 import com._2491nomythic.tempest.commands.drivetrain.Drive;
-import com._2491nomythic.tempest.commands.drivetrain.QuadraticDrive;
-import com._2491nomythic.tempest.commands.drivetrain.TwoStickDrive;
 import com._2491nomythic.tempest.settings.Constants;
 import com._2491nomythic.tempest.settings.Variables;
-import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -52,7 +48,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 		catch (Exception e) { 
 			DriverStation.reportError("NavX instantiation failure! Check gyro USB cable", Variables.debugMode);
 			
-			if (Variables.debugMode) { System.out.println(e); }
+			if (Variables.debugMode) { e.printStackTrace(); }
 		}
 		
 		/* Instantiates Drivetrain's Talons */
@@ -65,7 +61,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 		catch (Exception e) {
 			DriverStation.reportError("TalonSRX instantiation failure! Check CAN Bus, TalonSRX Decive ID's, and TalonSRX power", Variables.debugMode);
 			
-			if (Variables.debugMode) { System.out.println(e); }
+			if (Variables.debugMode) { e.printStackTrace(); }
 		}
 		
 		/* Sets Talon's H-bridge direction  */
@@ -225,14 +221,14 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	/**
 	 * Resets the left drive encoder value to 0
 	 */
-	public void resetLeftEncoder() {
+	private void resetLeftEncoder() {
 		leftMaster.setSelectedSensorPosition(0, Constants.kVelocitySlotId, Constants.kTimeoutMs);
 	}
 	
 	/**
 	 * Resets the right drive encoder value to 0
 	 */
-	public void resetRightEncoder() {
+	private void resetRightEncoder() {
 		rightMaster.setSelectedSensorPosition(0, Constants.kVelocitySlotId, Constants.kTimeoutMs);
 	}
 	
@@ -247,7 +243,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * 
 	 * @return Value of left encoder in raw ticks;
 	 */
-	public double getLeftEncoderDistanceRaw() {
+	private double getLeftEncoderDistanceRaw() {
 		return leftMaster.getSelectedSensorPosition(0);
 	}
 	
@@ -255,35 +251,35 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	 * 
 	 * @return Value of right encoder in raw ticks
 	 */
-	public double getRightEncoderDistanceRaw() {
+	private double getRightEncoderDistanceRaw() {
 		return rightMaster.getSelectedSensorPosition(0);
 	}
 	
 	/**
 	 * @return The value of the right drive encoder in inches
 	 */
-	public double getRightEncoderDistance() {
+	private double getRightEncoderDistance() {
 		return getRightEncoderDistanceRaw() * Constants.driveEncoderToInches;
 	}
 	
 	/**
 	 * @return The average value of the two encoders in inches
 	 */
-	public double getDistance() {
+	private double getDistance() {
 		return (getRightEncoderDistance() + getLeftEncoderDistance()) / 2;
 	}
 	
 	/**
 	 * @return The speed of the left motor in RPS
 	 */
-	public double getLeftEncoderRate() {
+	private double getLeftEncoderRate() {
 		return leftMaster.getSelectedSensorVelocity(0) * Constants.driveEncoderVelocityToRPS;
 	}
 	
 	/**
 	 * @return The speed of the right motor in RPS
 	 */
-	public double getRightEncoderRate() {
+	private double getRightEncoderRate() {
 		return rightMaster.getSelectedSensorVelocity(0) * Constants.driveEncoderVelocityToRPS;
 	}
 	
@@ -416,7 +412,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 		return currentPIDOutput;
 	}
 	
-	public void setTalonPID(double proportional, double iterative, double derivative) {
+	private void setTalonPID(double proportional, double iterative, double derivative) {
 		leftMaster.config_kP(Constants.kVelocitySlotId, proportional, Constants.kTimeoutMs);
 		rightMaster.config_kP(Constants.kVelocitySlotId, proportional, Constants.kTimeoutMs);
 
@@ -427,7 +423,7 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 		rightMaster.config_kD(Constants.kVelocitySlotId, derivative, Constants.kTimeoutMs);
 	}
 	
-	public void setTalonF(double feedForward) {
+	private void setTalonF(double feedForward) {
 		leftMaster.config_kF(Constants.kVelocitySlotId, feedForward, Constants.kTimeoutMs);
 		rightMaster.config_kF(Constants.kVelocitySlotId, feedForward, Constants.kTimeoutMs);
 	}

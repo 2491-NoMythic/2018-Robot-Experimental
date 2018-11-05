@@ -61,7 +61,7 @@ public abstract class _CommandBase extends Command {
 	 * CommandBase stores creates and stores each control system. 
 	 * To access a subsystem elsewhere in your code in your code use CommandBase.exampleSubsystem
 	 */
-	public _CommandBase() {
+    protected _CommandBase() {
 		super();
 	}
 }

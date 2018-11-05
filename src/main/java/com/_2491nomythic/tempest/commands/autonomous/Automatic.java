@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Automatic extends _CommandBase {
 	private int mPathLength;
-    @SuppressWarnings("unused")
-	private double mWaitTime;
 	private DrivePath mPath;
 	private final DriveTime hitSwitch;
 	private final SetShooterSpeed mSetSwitchSpeed;
@@ -34,17 +32,7 @@ public class Automatic extends _CommandBase {
 		LEFT(true, true), 
 		CENTER(false, false), 
 		RIGHT(false, true), 
-		CROSS_LINE(true, false), //after this line, values need verification 
-		LEFT_NULL(false, false),
-		RIGHT_NULL(false, false), 
-		LEFT_CUBE(false, false), 
-		RIGHT_CUBE(false, false), 
-		LEFT_SWITCH(false, false), 
-		RIGHT_SWITCH(false, false), 
-		LEFT_BACKUP(false, false), 
-		RIGHT_BACKUP(false, false), 
-		LEFT_PYRAMID(false, false), 
-		RIGHT_PYRAMID(false, false);
+		CROSS_LINE(true, false); //after this line, values need verification
 
 		private final int mHeadingModifier;
 		private final int mDirectionModifier;
@@ -87,11 +75,7 @@ public class Automatic extends _CommandBase {
 		MAX(Constants.MAX),
 		CUBE(Constants.CUBE),
 		NULL(Constants.NULL),
-		BACKUP(Constants.BACKUP),
-		LEFT_PYRAMID(Constants.LEFT_PYRAMID),
-		RIGHT_PYRAMID(Constants.RIGHT_PYRAMID),
-		SECOND_LEFT_SWITCH(Constants.SECOND_LEFT_SWITCH),
-		SECOND_RIGHT_SWITCH(Constants.SECOND_RIGHT_SWITCH);
+		BACKUP(Constants.BACKUP);
 
 		private final double[][] calculatedPath;
 
@@ -141,9 +125,9 @@ public class Automatic extends _CommandBase {
 	
 	/**
 	 * 
-	 * @param position
-	 * @param priority
-	 * @param crossing
+	 * @param position the robot's {@link StartPosition}
+	 * @param priority chosen scoring{@link Priority}
+	 * @param crossing chosen {@link Crossing} setting
 	 */
     public Automatic(StartPosition position, Priority priority, Crossing crossing) {
     	this.mStartPosition = position;
@@ -154,8 +138,7 @@ public class Automatic extends _CommandBase {
     	mRevShoot = new RunShooterCustom();
     	mRevShoot2 = new RunShooterCustom();
     	mTimer = new Timer();
-    	mWaitTime = 15;
-    	
+
     	mFireCubeSwitch = new TransportCubeTime(-1, 2);
     	mFireCubeScale = new TransportCubeTime(1, 1);
     	hitSwitch = new DriveTime(0.2, 0.2, 1);
@@ -184,7 +167,6 @@ public class Automatic extends _CommandBase {
 	    		if(currentStep == mPathLength - 12 || currentStep == mPathLength - 13) {
 		   			intake.openArms();
 		   			shooter.setScalePosition();
-		   			mWaitTime = 0.1;
 		   		} else if(currentStep == mPathLength - 17 || currentStep == mPathLength - 18) {
 		   			mSetScaleSpeed.start();
 		   			mRevShoot.start();
@@ -195,7 +177,6 @@ public class Automatic extends _CommandBase {
 	    		if(currentStep == mPathLength - 60 || currentStep == mPathLength - 61) {
 	    			intake.openArms();
 	    			shooter.setScalePosition();
-	    			mWaitTime = 0.1;
 	    		} else if(currentStep == mPathLength - 85 || currentStep == mPathLength - 86) {
 	    			mSetScaleSpeed.start();
 	    			mRevShoot.start();

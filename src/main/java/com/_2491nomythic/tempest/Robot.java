@@ -13,10 +13,8 @@ import com._2491nomythic.tempest.commands.ResetSolenoids;
 import com._2491nomythic.tempest.commands.SetCameraMode;
 import com._2491nomythic.tempest.commands.autonomous.Automatic;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.Crossing;
-import com._2491nomythic.tempest.commands.autonomous.Automatic.EndPosition;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.Priority;
 import com._2491nomythic.tempest.commands.autonomous.Automatic.StartPosition;
-import com._2491nomythic.tempest.commands.drivetrain.DrivePath;
 import com._2491nomythic.tempest.commands.drivetrain.DriveTime;
 import com._2491nomythic.tempest.commands.lights.SendAllianceColor;
 import com._2491nomythic.tempest.commands.lights.SerialConnectivityTest;
@@ -41,22 +39,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
-	Command m_autonomousCommand;
-	ResetSolenoids resetSolenoids;
-	UpdateLightsPattern updateLights;
-	SerialConnectivityTest staticPurple;
-	SetCameraMode setCamera;
-	SendAllianceColor sendColor;
-	Preferences pref;
+	private Command m_autonomousCommand;
+	private ResetSolenoids resetSolenoids;
+	private UpdateLightsPattern updateLights;
+	private SerialConnectivityTest staticPurple;
+	private SetCameraMode setCamera;
+	private SendAllianceColor sendColor;
+	//private Preferences pref;
 	
-	SendableChooser<StartPosition> m_PositionSelector = new SendableChooser<>();
-	SendableChooser<Priority> m_PrioritySelector = new SendableChooser<>();
-	SendableChooser<Crossing> m_CrossingSelector = new SendableChooser<>();
-	SendableChooser<ControllerType> m_ControllerType = new SendableChooser<>();
+	private SendableChooser<StartPosition> m_PositionSelector = new SendableChooser<>();
+	private SendableChooser<Priority> m_PrioritySelector = new SendableChooser<>();
+	private SendableChooser<Crossing> m_CrossingSelector = new SendableChooser<>();
+	private SendableChooser<ControllerType> m_ControllerType = new SendableChooser<>();
 
-	public static boolean isTeleop;
-
-	/**
+    /**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
@@ -100,7 +96,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("HitSwitch", new DriveTime(-0.3, 0.4, 0.8));
 
 		SmartDashboard.putNumber("AutoDelay", Variables.autoDelay);
-		SmartDashboard.putData("Backup", new DrivePath(StartPosition.LEFT_SWITCH, EndPosition.BACKUP, false));
 		System.out.println("Boot Successful");
 	}
 
@@ -117,8 +112,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		isTeleop = false;
-		updateLights.cancel();
+        updateLights.cancel();
 		staticPurple.start();
 		setCamera.start();
 	}
@@ -141,6 +135,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		Variables.autoDelay = SmartDashboard.getNumber("AutoDelay", 0);
+		resetSolenoids.start();
 		sendColor.start();
 		
 		m_autonomousCommand = new Automatic(m_PositionSelector.getSelected(), m_PrioritySelector.getSelected(), m_CrossingSelector.getSelected());
@@ -150,12 +145,9 @@ public class Robot extends TimedRobot {
 		//sendColor.start();
 
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
+		m_autonomousCommand.start();
 
-		isTeleop = false;
-	}
+    }
 
 	/**
 	 * This function is called periodically during autonomous.
@@ -177,8 +169,7 @@ public class Robot extends TimedRobot {
 		//m_ControllerType.getSelected();
 		
 		sendColor.start();
-		isTeleop = true;
-		setCamera.start();
+        setCamera.start();
 	}
 
 	/**
@@ -195,7 +186,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 
-	public void outputToSmartDashboard() {
+	private void outputToSmartDashboard() {
 		SmartDashboard.putNumber("Gyro Angle", Drivetrain.getInstance().getGyroAngle());
 		SmartDashboard.putBoolean("ShooterReadyToFire", Variables.readyToFire);
 		SmartDashboard.putNumber("LeftShootRPS", Shooter.getInstance().getLeftShootVelocity());

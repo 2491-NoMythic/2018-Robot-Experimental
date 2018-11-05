@@ -113,7 +113,7 @@ public final class Constants {
 			{0,centerStartPos},
 			{3,centerStartPos},
 			{8,19},
-			{14-3.82667,19}//-3.16667
+			{14-3.82667,19} //-3.16667
 		},
 		{
 			{4, kDefaultTimeStep}

@@ -17,7 +17,7 @@ public class ToggleShooterPosition extends _CommandBase {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		if (shooter.inSwitchPosition() && !intake.armsRetracted()) {
+		if (shooter.inSwitchPosition() && intake.armsExtended()) {
 			shooter.setScalePosition();
 		}
 		else {

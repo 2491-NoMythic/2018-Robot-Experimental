@@ -17,7 +17,7 @@ public class ToggleIntakeDeployment extends _CommandBase {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		if(!intake.armsRetracted() && shooter.inSwitchPosition()) {
+		if(intake.armsExtended() && shooter.inSwitchPosition()) {
 			intake.retractArms();
 		}
 		else {

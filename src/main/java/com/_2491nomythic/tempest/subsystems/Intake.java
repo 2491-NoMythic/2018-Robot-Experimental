@@ -26,7 +26,7 @@ public class Intake extends Subsystem {
 	/**
 	 * The subsystem that takes Power Cubes from the field
 	 */
-	public Intake() {
+	private Intake() {
 		left = new TalonSRX(Constants.intakeTalonLeftChannel);
 		left.setInverted(true);
 		
@@ -52,7 +52,7 @@ public class Intake extends Subsystem {
 	 * Runs the left side of the intake to capture Power Cubes.
 	 * @param speed The speed that the motors will run at.
 	 */
-	public void runLeft(double speed) {
+	private void runLeft(double speed) {
 		left.set(ControlMode.PercentOutput, speed);
 	}
 	
@@ -60,7 +60,7 @@ public class Intake extends Subsystem {
 	 * Runs the right side of the intake to capture Power Cubes.
 	 * @param speed the speed that the motors will run at.
 	 */
-	public void runRight(double speed) {
+	private void runRight(double speed) {
 		right.set(ControlMode.PercentOutput, speed);
 	}
 	
@@ -97,8 +97,8 @@ public class Intake extends Subsystem {
 	 * Returns whether or not the intake arms are extended.
 	 * @return Whether or not the intake arms are extended.
 	 */
-	public boolean armsRetracted() {
-		return deploymentSolenoid.get() == Value.kReverse || deploymentSolenoid.get() == Value.kOff;
+	public boolean armsExtended() {
+		return deploymentSolenoid.get() != Value.kReverse && deploymentSolenoid.get() != Value.kOff;
 	}
 	
 	/**
