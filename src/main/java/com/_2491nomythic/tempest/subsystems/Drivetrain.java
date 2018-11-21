@@ -466,11 +466,6 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	}
 
 	@Override
-	public boolean checkSys() {
-		return false;
-	}
-
-	@Override
 	public void outputToSmartDashboard() {
 
 	}
@@ -478,5 +473,10 @@ public class Drivetrain extends PIDSubsystem implements ISubsystem{
 	@Override
     public void periodic() {
 
-    }
+	}
+	
+	@Override
+	public boolean checkSys() {
+		return true;
+	}
 }

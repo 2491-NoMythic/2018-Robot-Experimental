@@ -47,21 +47,19 @@ public class OI {
 	private Button configure;
 	private Button spinUp;
 	private Button fingers;
-
 	public enum ControllerType {
 		F310,
 		PS4,
 		Xbox,
 		ButtonBoard
 	}
+	private ControlBoard mControlBoard = ControlBoard.getInstance();
 	
 	public void init() {
 		controllers[0] = new Joystick(ControllerMap.driveController);
 		controllers[1] = new PS4Controller(ControllerMap.operatorController);
 		
 		//Main Drive Controller
-		Button killSwitch1 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.killSwitchButton1);
-		killSwitch1.whenPressed(new KillSwitch());
 
 		Button killSwitch2 = new JoystickButton(controllers[ControllerMap.driveController], ControllerMap.killSwitchButton2);
 		killSwitch2.whenPressed(new KillSwitch());

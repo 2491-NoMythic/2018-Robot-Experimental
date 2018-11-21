@@ -116,7 +116,7 @@ public final class Constants {
 			{14-3.82667,19} //-3.16667
 		},
 		{
-			{4, kDefaultTimeStep}
+			{6, kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] RIGHT_SWITCH = {
@@ -127,7 +127,7 @@ public final class Constants {
 			{14-3.16667,9}
 		},
 		{
-			{4,kDefaultTimeStep}
+			{6,kDefaultTimeStep}
 		}
 	};
 	public static final double[][][] OPPOSITE_SWTICH = null;
